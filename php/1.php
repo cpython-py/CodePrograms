@@ -9,7 +9,7 @@
     <h1>My first PHP page</h1>  <!--HTML标签-->
     
     <?php
-    echo "Hello World!";  <!--输出-->
+    echo "Hello World!";  //输出
     ?>
 </body>
 </html>
