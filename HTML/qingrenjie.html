@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>专属烟花祝福</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: #0a0f1e;
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 1;
+            pointer-events: auto;
+        }
+
+        /* 点击启动层 */
+        #startBtn {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            color: #fff;
+            font-size: 2rem;
+            text-shadow: 0 0 20px #ffaa33;
+            cursor: pointer;
+        }
+
+        #startBtn img {
+            width: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* 文字显示区 */
+        .text-area {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            pointer-events: none;
+            color: #fff;
+            text-shadow: 0 0 20px #ffaa33;
+            font-size: 1.6rem;
+            line-height: 2.2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            padding: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(3px);
+        }
+
+        .xx {
+            color: #ff3366;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* 音乐控制按钮 */
+        #musicCtrl {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(20, 30, 45, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 12px 24px;
+            color: #ffecb3;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #ffaa33;
+            cursor: pointer;
+            pointer-events: auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #musicIcon {
+            font-size: 1.8rem;
+        }
+
+        #musicText {
+            white-space: nowrap;
+        }
+
+        /* 隐藏的文字容器 */
+        #hiddenText {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 隐藏的文字（在这里修改为你想要的内容） -->
+    <div id="hiddenText">
+        你知道吗,我们相遇已经有1年多了,虽然你不是我的情人,但我还要祝福你身体健康,学业有成,每天开心,将来嫁给一个优秀的男孩子.
+    </div>
+
+    <!-- 启动按钮（点爆） -->
+    <div id="startBtn">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffaa33'%3E%3Cpath d='M12 2L15 9H22L16 14L19 21L12 16.5L5 21L8 14L2 9H9L12 2Z'/%3E%3C/svg%3E"
+            alt="star">
+        <p>💥 点 爆 💥</p>
+    </div>
+
+    <!-- 音乐控制按钮 -->
+    <div id="musicCtrl">
+        <span id="musicIcon">🔇</span>
+        <span id="musicText">播放音乐</span>
+    </div>
+
+    <!-- 文字显示区域 -->
+    <div class="text-area" id="textDisplay"></div>
+
+    <!-- 画布 -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- 音频元素（替换src为你自己的音乐链接） -->
+    <audio id="bgMusic" loop preload="auto"
+        src="https://yugen-2026qingrenjie.oss-cn-chengdu.aliyuncs.com/yugen.mp3"></audio>
+
+    <script>
+        (function () {
+            // ---------- 烟花粒子系统 ----------
+            const canvas = document.getElementById('fireworksCanvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            let lastBirth = 0;
+            const BIRTH_INTERVAL = 400; // 自动生成烟花的间隔
+
+            function resize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            // 粒子类
+            class Particle {
+                constructor(x, y, vx, vy, color, size, life, maxLife) {
+                    this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+                    this.color = color; this.size = size; this.life = life; this.maxLife = maxLife;
+                }
+                update(gravity, friction) {
+                    this.vx *= friction;
+                    this.vy *= friction;
+                    this.vy += gravity;
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.life -= 1 / (this.maxLife * 60);
+                }
+            }
+
+            // 生成烟花
+            function createExplosion(centerX, centerY) {
+                if (!width || !height) return;
+                const count = 30 + Math.floor(Math.random() * 40);
+                const baseHue = Math.random() * 360;
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 2 + Math.random() * 6;
+                    const vx = Math.cos(angle) * speed * (0.5 + Math.random());
+                    const vy = Math.sin(angle) * speed * (0.5 + Math.random()) - 1;
+                    const hue = (baseHue + (Math.random() * 60 - 30)) % 360;
+                    const color = `hsl(${hue}, 100%, 65%)`;
+                    const size = 2 + Math.random() * 5;
+                    const maxLife = 70 + Math.floor(Math.random() * 80);
+                    particles.push(new Particle(centerX, centerY, vx, vy, color, size, 1.0, maxLife));
+                }
+            }
+
+            // 更新粒子
+            function updateParticles(gravity = 0.12, friction = 0.98) {
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.update(gravity, friction);
+                    if (p.life <= 0.02 || p.y > height + 100 || p.x < -100 || p.x > width + 100) {
+                        particles.splice(i, 1);
+                    }
+                }
+            }
+
+            // 绘制
+            function draw() {
+                ctx.fillStyle = 'rgba(10, 15, 30, 0.3)';
+                ctx.fillRect(0, 0, width, height);
+                for (let p of particles) {
+                    ctx.globalAlpha = p.life * 0.9;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.shadowColor = p.color;
+                    ctx.shadowBlur = 8;
+                    ctx.fill();
+                }
+                ctx.shadowBlur = 0;
+                ctx.globalAlpha = 1.0;
+            }
+
+            // 动画循环
+            function animate(now) {
+                updateParticles();
+                if (!lastBirth) lastBirth = now;
+                else if (now - lastBirth > BIRTH_INTERVAL) {
+                    const x = width * (0.2 + Math.random() * 0.6);
+                    const y = height * (0.2 + Math.random() * 0.4);
+                    createExplosion(x, y);
+                    lastBirth = now;
+                }
+                draw();
+                requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+
+            // ---------- 文字逐字出现 ----------
+            const hiddenDiv = document.getElementById('hiddenText');
+            const textDisplay = document.getElementById('textDisplay');
+            let fullText = hiddenDiv.innerText;   // 获取隐藏文字
+            // 将 # 替换为换行标记
+            fullText = fullText.replace(/#/g, '\n'); // 也可以保留#用于换行，下面处理
+            let displayStr = '';
+            let index = 0;
+            let timer = null;
+
+            function startTyping() {
+                if (timer) clearInterval(timer);
+                displayStr = '';
+                index = 0;
+                timer = setInterval(() => {
+                    if (index < fullText.length) {
+                        let ch = fullText[index++];
+                        if (ch === '\n') {
+                            displayStr += '<br/>';
+                        } else {
+                            displayStr += ch;
+                        }
+                        textDisplay.innerHTML = '<p>' + displayStr + '<span class="xx">❤️</span></p>';
+                    } else {
+                        clearInterval(timer);
+                        textDisplay.innerHTML = '<p>' + displayStr + '</p>';
+                    }
+                }, 100);
+            }
+
+            // ---------- 音乐控制 ----------
+            const audio = document.getElementById('bgMusic');
+            const musicCtrl = document.getElementById('musicCtrl');
+            const musicIcon = document.getElementById('musicIcon');
+            const musicText = document.getElementById('musicText');
+            let isMusicPlaying = false;
+
+            function toggleMusic(forcePlay = false) {
+                if (forcePlay && audio.paused) {
+                    audio.play().then(() => {
+                        isMusicPlaying = true;
+                        updateMusicUI();
+                    }).catch(e => console.log('音乐播放失败', e));
+                } else if (audio.paused) {
+                    audio.play().then(() => {
+                        isMusicPlaying = true;
+                        updateMusicUI();
+                    }).catch(e => console.log('音乐播放失败', e));
+                } else {
+                    audio.pause();
+                    isMusicPlaying = false;
+                    updateMusicUI();
+                }
+            }
+
+            function updateMusicUI() {
+                if (isMusicPlaying) {
+                    musicIcon.innerText = '🎵';
+                    musicText.innerText = '音乐播放中';
+                } else {
+                    musicIcon.innerText = '🔇';
+                    musicText.innerText = '播放音乐';
+                }
+            }
+
+            musicCtrl.addEventListener('click', () => toggleMusic());
+
+            // ---------- 启动按钮（修改点在此） ----------
+            const startBtn = document.getElementById('startBtn');
+            startBtn.addEventListener('click', () => {
+                startBtn.style.display = 'none';   // 隐藏启动层
+                // 播放音乐（如果尚未播放）
+                if (audio.paused) {
+                    toggleMusic(true);
+                }
+                // 【修改】立即开始打字，不再延迟5秒
+                startTyping();
+                // 同时生成一些初始烟花（增强效果）
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const x = width * (0.3 + Math.random() * 0.4);
+                        const y = height * (0.2 + Math.random() * 0.3);
+                        createExplosion(x, y);
+                    }, i * 300);
+                }
+            });
+
+            // 点击画布也可触发烟花（增强互动）
+            canvas.addEventListener('click', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const x = (e.clientX - rect.left) * scaleX;
+                const y = (e.clientY - rect.top) * scaleY;
+                createExplosion(x, y);
+            });
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const x = (touch.clientX - rect.left) * scaleX;
+                const y = (touch.clientY - rect.top) * scaleY;
+                createExplosion(x, y);
+            }, { passive: false });
+
+            // 初始化时生成几个烟花
+            setTimeout(() => {
+                if (width && height) {
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            createExplosion(width * (0.3 + Math.random() * 0.4), height * 0.3);
+                        }, i * 200);
+                    }
+                }
+            }, 300);
+        })();
+    </script>
+</body>
+
+</html>

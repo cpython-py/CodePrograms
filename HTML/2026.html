@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026甲辰龙年新春祝福 🐉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(to bottom, #8B0000, #C8102E);
+            /* 新年红渐变背景 */
+            height: 100vh;
+            font-family: "SimHei", "Microsoft YaHei", sans-serif;
+        }
+
+        #canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .text-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            pointer-events: none;
+            /* 不遮挡画布交互 */
+            padding-top: 20px;
+        }
+
+        .title {
+            font-size: 4rem;
+            color: #FFD700;
+            /* 金色 */
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #FFD700;
+        }
+
+        .countdown {
+            font-size: 1.8rem;
+            color: #FFFFFF;
+            /* 白色 */
+            margin-bottom: 15px;
+        }
+
+        .wish {
+            font-size: 1.8rem;
+            color: #FFC0CB;
+            /* 粉色 */
+            margin-bottom: 20px;
+        }
+
+        .tip {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            color: #FFFF00;
+            /* 黄色 */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 画布：承载所有动态效果 -->
+    <canvas id="canvas"></canvas>
+
+    <!-- 文字层：祝福语/倒计时 -->
+    <div class="text-container">
+        <div class="title">2026 龙年大吉</div>
+        <div class="countdown" id="countdown"></div>
+        <div class="wish" id="wish"></div>
+        <div class="tip">点击屏幕生成烟花 | 2026新年快乐！</div>
+    </div>
+
+    <script>
+        // ========== 核心配置 ==========
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        // 适配窗口大小变化
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // ========== 1. 烟花效果 ==========
+        class Firework {
+            constructor(x = null, y = null) {
+                this.x = x || Math.random() * (width - 100) + 50;
+                this.y = height;
+                this.speed = Math.random() * 7 + 8;
+                this.color = ['#FF0000', '#FFD700', '#FFC0CB', '#FFFF00'][Math.floor(Math.random() * 4)];
+                this.radius = Math.random() * 3 + 3;
+                this.exploded = false;
+                this.particles = [];
+            }
+
+            update() {
+                if (!this.exploded) {
+                    this.y -= this.speed;
+                    // 到达高度后爆炸
+                    if (this.y < Math.random() * 200 + 100) {
+                        this.exploded = true;
+                        // 生成爆炸粒子
+                        for (let i = 0; i < 50; i++) {
+                            this.particles.push({
+                                x: this.x,
+                                y: this.y,
+                                vx: Math.random() * 16 - 8,
+                                vy: Math.random() * 16 - 8,
+                                color: this.color,
+                                radius: Math.random() * 2 + 2,
+                                life: 60
+                            });
+                        }
+                    }
+                } else {
+                    // 粒子扩散（带重力）
+                    this.particles.forEach(particle => {
+                        particle.x += particle.vx;
+                        particle.y += particle.vy;
+                        particle.vy += 0.2; // 重力
+                        particle.life--;
+                        particle.radius = Math.max(0, particle.radius - 0.05);
+                    });
+                    // 移除死亡粒子
+                    this.particles = this.particles.filter(p => p.life > 0);
+                }
+            }
+
+            draw() {
+                if (!this.exploded) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                } else {
+                    this.particles.forEach(particle => {
+                        ctx.beginPath();
+                        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = particle.color;
+                        ctx.fill();
+                    });
+                }
+            }
+        }
+
+        // ========== 2. 动态龙形 ==========
+        class Dragon {
+            constructor() {
+                this.x = width + 50;
+                this.y = Math.random() * 200 + 100;
+                this.speed = Math.random() * 2 + 2;
+                this.angle = 0;
+                this.scale = Math.random() * 0.4 + 0.8;
+            }
+
+            update() {
+                this.x -= this.speed;
+                this.y += Math.sin(this.angle) * 2;
+                this.angle += 0.05;
+                // 飞出屏幕后重置
+                if (this.x < -100) {
+                    this.x = width + 50;
+                    this.y = Math.random() * 200 + 100;
+                    this.speed = Math.random() * 2 + 2;
+                }
+            }
+
+            draw() {
+                // 绘制动态龙（由圆形组成，模拟身体摆动）
+                const headX = this.x;
+                const headY = this.y;
+                // 龙头
+                ctx.beginPath();
+                ctx.arc(headX, headY, 15 * this.scale, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFD700';
+                ctx.fill();
+                // 龙身
+                for (let i = 1; i < 8; i++) {
+                    const partX = headX + i * 15 * this.scale + Math.sin(this.angle + i * 0.5) * 5;
+                    const partY = headY + Math.cos(this.angle + i * 0.5) * 8;
+                    ctx.beginPath();
+                    ctx.arc(partX, partY, (10 - i * 0.8) * this.scale, 0, Math.PI * 2);
+                    ctx.fillStyle = '#FFD700';
+                    ctx.fill();
+                    // 龙鳞亮点
+                    if (Math.random() > 0.7) {
+                        ctx.beginPath();
+                        ctx.arc(partX, partY, (5 - i * 0.4) * this.scale, 0, Math.PI * 2);
+                        ctx.fillStyle = '#FFFF00';
+                        ctx.fill();
+                    }
+                }
+                // 龙尾
+                const tailX = headX + 8 * 15 * this.scale;
+                const tailY = headY + Math.sin(this.angle + 4) * 10;
+                ctx.beginPath();
+                ctx.arc(tailX, tailY, 5 * this.scale, 0, Math.PI * 2);
+                ctx.fillStyle = '#FF0000';
+                ctx.fill();
+            }
+        }
+
+        // ========== 3. 飘落红包/福字 ==========
+        class RedPacket {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = -20;
+                this.speed = Math.random() * 2 + 1;
+                this.rotateSpeed = Math.random() * 4 - 2;
+                this.rotation = 0;
+                this.type = Math.random() > 0.5 ? 'packet' : 'fu'; // 红包/福字
+            }
+
+            update() {
+                this.y += this.speed;
+                this.rotation += this.rotateSpeed;
+                // 左右摇摆
+                this.x += Math.sin(this.y / 20) * 1.5;
+                // 落出屏幕后重置
+                if (this.y > height + 20) {
+                    this.x = Math.random() * width;
+                    this.y = -20;
+                    this.speed = Math.random() * 2 + 1;
+                }
+            }
+
+            draw() {
+                ctx.save(); // 保存画布状态
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180); // 旋转
+
+                if (this.type === 'packet') {
+                    // 绘制红包
+                    ctx.fillStyle = '#FF0000';
+                    ctx.fillRect(-20, -30, 40, 60);
+                    // 金边
+                    ctx.strokeStyle = '#FFD700';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(-18, -28, 36, 56);
+                    // 福字
+                    ctx.fillStyle = '#FFD700';
+                    ctx.font = '20px SimHei';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('福', 0, 5);
+                } else {
+                    // 绘制福字
+                    ctx.fillStyle = '#FFD700';
+                    ctx.font = '30px SimHei';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('福', 0, 8);
+                }
+
+                ctx.restore(); // 恢复画布状态
+            }
+        }
+
+        // ========== 4. 辅助功能（倒计时/祝福语） ==========
+        // 计算距离2026春节天数
+        function getCountdownText() {
+            try {
+                const springFestival = new Date(2026, 1, 17); // 2026年2月17日（月份从0开始）
+                const today = new Date();
+                const days = Math.floor((springFestival - today) / (1000 * 60 * 60 * 24));
+
+                if (days > 0) return `距离2026春节还有 ${days} 天 🎊`;
+                else if (days === 0) return '今天就是2026春节！🎉 新年快乐！';
+                else return `2026春节已过去 ${Math.abs(days)} 天 ✨`;
+            } catch (e) {
+                return '2026甲辰龙年，新年快乐！🐉';
+            }
+        }
+
+        // 随机祝福语
+        function getRandomWish() {
+            const wishes = [
+                '2026龙年大吉，万事如意！🐉',
+                '甲辰龙年，龙行大运，阖家幸福！🏮',
+                '新的一年，财源滚滚，心想事成！💰',
+                '龙气冲天，前程似锦，平安喜乐！✨',
+                '龙年新气象，日子红红火火！🔥',
+                '龙马精神，岁岁平安，年年有余！🍊',
+                '金龙贺岁，福气满满，好运连连！🎁'
+            ];
+            return wishes[Math.floor(Math.random() * wishes.length)];
+        }
+
+        // 更新文字显示
+        document.getElementById('countdown').textContent = getCountdownText();
+        document.getElementById('wish').textContent = getRandomWish();
+
+        // ========== 5. 初始化并运行 ==========
+        let fireworks = [];
+        let dragons = [new Dragon(), new Dragon()]; // 2条龙
+        let redPackets = Array.from({ length: 8 }, () => new RedPacket()); // 8个红包
+
+        // 点击屏幕生成烟花
+        canvas.addEventListener('click', (e) => {
+            fireworks.push(new Firework(e.clientX, e.clientY));
+        });
+
+        // 动画循环
+        function animate() {
+            // 半透明背景（实现拖影效果）
+            ctx.fillStyle = 'rgba(139, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, width, height);
+
+            // 自动生成烟花（每800ms一个）
+            if (Math.random() < 0.008) {
+                fireworks.push(new Firework());
+            }
+
+            // 更新并绘制所有元素
+            // 1. 烟花
+            fireworks.forEach((firework, index) => {
+                firework.update();
+                firework.draw();
+                // 移除爆炸完毕的烟花
+                if (firework.exploded && firework.particles.length === 0) {
+                    fireworks.splice(index, 1);
+                }
+            });
+
+            // 2. 龙
+            dragons.forEach(dragon => {
+                dragon.update();
+                dragon.draw();
+            });
+
+            // 3. 红包/福字
+            redPackets.forEach(packet => {
+                packet.update();
+                packet.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // 启动动画
+        animate();
+    </script>
+</body>
+
+</html>
