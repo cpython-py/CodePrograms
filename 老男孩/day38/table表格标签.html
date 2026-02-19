@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table 表格标签</title>
+</head>
+<body>
+    <!-- 
+    ###part1
+    table 表格 border 表框 width 宽度
+    tr 表示一行
+    th 表示标题加粗
+    td 表示一个单元格 
+    -->
+
+    <table border=1 width="1000px">
+        <thead style="background-color: tan;">
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>薪水</th>
+                <th>部门</th>
+            </tr>
+        </thead>
+
+        <tbody style="background-color: teal;">
+        <tr>
+            <td>王文</td>
+            <td>18</td>
+            <td>10万</td>
+            <td>python</td>
+        </tr>
+
+        <tr>
+            <td>王伟</td>
+            <td>20</td>
+            <td>11美元</td>
+            <td>开发部门</td>
+        </tr>
+
+        <tr>
+            <td>王致和</td>
+            <td>22</td>
+            <td>100万</td>
+            <td>臭豆腐研发部门</td>
+        </tr>
+        </tbody>
+        
+        <tfoot style="background-color: thistle;">
+            <tr>
+                <td>lianxi1</td>
+                <td>lianxi2</td>
+                <td>lianxi3</td>
+                <td>lianxi4</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <hr style="width:20px;height:100px">
+
+    <!-- colspan横向合并 -->
+    <!-- rowspan纵向合并 -->
+    <table border=1 width="1000px">
+        <thead style="background-color: tan;">
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>薪水</th>
+                <th>部门</th>
+            </tr>
+        </thead>
+
+        <tbody style="background-color: teal;"> 
+            <tr>
+                <td colspan=2>123</td>
+                <td>10万</td>
+                <td rowspan="3">销售</td>
+            </tr>
+            
+            <tr>
+                <td>王伟</td>
+                <td>20</td>
+                <td>11美元</td>
+            </tr>
+
+            <tr>
+                <td>王致和</td>
+                <td>22</td>
+                <td>100万</td>
+            </tr>
+        </tbody>
+
+        <tfoot style="background-color: thistle;">
+            <tr>
+                <td colspan=4>lianxi1</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

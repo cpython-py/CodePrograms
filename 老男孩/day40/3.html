@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型</title>
+</head>
+<body>
+    <script>
+    var a1 = true;
+    var a1 = false;
+    console.log(a1, typeof(a1));
+    
+    var num = 0b101;
+    var num = 0o127;
+    var num = 0xff;
+    var num = 1000;
+    var num = 3.13;
+    var num = 3.13e2;
+    var num = 3.13e9999999;
+    var num = -3.13e999999;
+    var num = 10 - "abc";
+    var num = NaN+1;
+    var num = NaN == NaN;
+    var num = NaN != NaN;
+    var num = NaN > 100;
+    var num = isNaN(NaN);
+    console.log(num, typeof(num));
+    
+    var string = 'I love you';
+    var string = "I love python very much";
+    var string = `
+    <ul>
+        <li>111</li>
+    </ul>
+    `
+    var name = "找沈阳";
+    var string = `${name}`;
+    console.log(string);
+    
+    console.log(string,typeof(string));
+    
+    var obj = new Object();
+    var obj = {};
+    var arr = new Array();
+    var arr = [];
+    arr[0] = 1;
+    arr[1] = 2;
+    arr[2] = 3;
+    var arr = [10,11,12,13];
+    console.log(arr,typeof(arr));
+    
+    function func() {
+        console.log("我是函数");       
+    }
+    func();
+    console.log(func,typeof(func));
+    
+    var a;
+    console.log(a,typeof(a));
+    var a = null;
+    console.log(a,typeof(a));
+
+    var num = 1.234567;
+    var num = "abc";
+    var num = "123";
+    var num = "123abc";
+    var num = "abc123";
+    var num = "1.34abc";
+    var num = [];
+    var num = {};
+    var res = parseInt(num);
+    console.log(res, typeof(res));
+    
+    var num = 100;
+    var num = "1.34abc";
+    var res = parseFloat(num);
+    console.log(res, typeof(res));
+
+    var a = false;
+    var a = true;
+    var res = Number(a);
+    console.log(res, typeof(res));
+    </script>
+</body>
+</html>
