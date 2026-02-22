@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="event" value=""> <button id="btn">查询</button>
+    <script>
+        var btn = document.getElementById('btn');
+        btn.onclick = function() {
+            var event = document.querySelector('input[name=event]')
+            console.log(event.value);
+            // https://uapis.cn/api/v1/misc/weather?city=北京
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', `https://uapis.cn/api/v1/misc/weather?city=${event.value}`);
+        xhr.send();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log(xhr.responseText);                    
+                }
+            }
+        }
+    </script>
+</body>
+</html> 

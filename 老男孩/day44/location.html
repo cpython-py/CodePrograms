@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM对象 location</title>
+</head>
+<body>
+    <button onclick="func1()">查看location对象</button>
+    <button onclick="func2()">跳转其他页面</button>
+    <button onclick="func3()">刷新页面</button>
+    <button onclick="func4()">过一秒在刷新页面</button>
+
+    <script>
+
+        function func1() {
+            /* 链接地址:  http://ip + 端口号 + 路径 + 参数 + 锚点 */
+            console.log(location);
+            console.log(`协议:${location.protocol}`);
+            console.log(`ip端口号:${location.host}`);
+            console.log(`端口号:${location.port}`);
+            console.log(`路径:${location.pathname}`);
+            console.log(`获取锚点:${location.hash}`);
+            console.log(`获取地址栏参数:${location.search}`);
+            console.log(`完全地址:${location.href}`)
+        }
+
+        //跳转页面
+        function func2() {
+            // location.href = "http://www.baidu.com";方法一
+            location.assign("http://www.jd.com");
+        }
+
+        //刷新页面
+        function func3() {
+            location.reload();
+        }
+
+        // 过一秒在刷新页面
+        function func4() {
+            setTimeout(func3, 1000);
+            console.log("我执行了...")
+        }
+
+        // 每过一秒刷新一下页面
+        /* 等待所有页面图片文字全部加载完毕之后,再去执行对应的代码 */
+        window.onload = function () {
+            func4()
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+/* 第一部分 */
+.topbarbanner {
+    width: 100%;
+    height: 120px;
+}
+
+.topbarbanner a {
+    display: inline-block;
+    width: 100%;
+    height: 120px;
+    background: url(../image/ad.jpg) no-repeat;
+    background-size: auto 100%;
+    background-position: center;
+}
+
+/* 第二部分 */
+.topbar {
+    width: 100%;
+    height: 40px;
+    background-color: #333333;
+
+}
+
+.topbar .container {
+    width: 1226px;
+    height: 40px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* part1 导航链接 */
+.topbar .container .topbar-nav {
+    float: left;
+}
+
+.topbar .container .topbar-nav a, span { 
+    display: inline-block;
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    color: #b0b0b0;
+}
+
+.topbar .container .topbar-nav a:hover { 
+    color: white;
+}
+
+.topbar .container .topbar-nav span { 
+    color: #424242;
+    margin-left: 2px;
+}
+
+/* part2 登录 */
+.topbar .container .topbar-login {
+    width: 142px;
+    height: 40px;
+    font-size: 12px;
+    float: right;
+    color: #b0b0b0;
+    line-height: 40px;
+    padding-right: 5px;
+}
+
+.topbar .container .topbar-login a, span { 
+    display: inline-block;
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    color: #b0b0b0;
+}
+
+.topbar .container .topbar-login span {
+    color: #424242;
+    margin-right: 1.5px;
+}
+
+/* part3 购物车 */
+.topbar .container .topbar-shopping {
+    float: right;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #424242;
+    text-align: center;
+}
+
+.topbar .container .topbar-shopping:hover { 
+    background-color: white;
+    color: #ff6700;
+    cursor: pointer;
+}
+
+.topbar .container .topbar-shopping:hover a {
+    color: #ff6700;
+}
+
+.topbar .container .topbar-shopping:hover strong {
+    color: #ff6700;
+}
+
+
+.topbar .container .topbar-shopping a, strong { 
+    font-size: 12px;
+    color: #b0b0b0;
+}
+
+.topbar .container .topbar-shopping strong { 
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+/* 第三部分 */
+.header {
+    height: 100px;
+    clear: both;
+    overflow: hidden;
+}
+
+.header .container {
+    width: 1226px;
+    height: 100px;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.header .container .header-logo {
+    float: left;
+    margin-top: 20px;
+}
+
+.header .container .header-logo a {
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    background: url("../image/mi-logo.png") no-repeat 50% 50%;
+    background-color: #ff6700;
+}
+
+.header .container .header-lst {
+    float: left;
+    height: 100px;
+    line-height: 100px;
+    padding-left: 170px;
+}
+
+.header .container .header-lst ul {
+    
+}
+
+.header .container .header-lst ul li {
+    float: left;
+    padding: 0px 10px 0px;
+}
+
+.header .container .header-lst ul li a { 
+    font-size: 16px;
+    color: #333333;
+}
+
+.header .container .header-lst ul li a:hover { 
+    color: #ff6700;
+    transition: all 0.5s;
+}
+
+.header .container .header-search {
+    float: right;
+    margin-top: 20px;
+}
+
+.header .container .header-search form { 
+
+}
+
+.header .container .header-search input[name=search] {
+    width: 245px;
+    height: 50px;
+    border: solid 1px #e0e0e0;
+    float: left;
+    padding-left: 10px;
+}
+
+.header .container .header-search input[name=search]:focus {
+    border: solid 1px #ff6700;
+    transition: all 2.5s;
+}
+
+.header .container .header-search input[name=search]:focus + input {
+    border: solid 1px #ff6700;
+    transition: all 2.5s;
+}
+
+.header .container .header-search input[name=submit] {
+    width: 52px;
+    height: 52px;
+    border: solid 1px #e0e0e0;
+    float: left;
+    margin-left: -1px;
+    font-weight: bold;
+    color: #616161;
+    background-color: white;
+    cursor: pointer;
+}
+
+.header .container .header-search input[name=submit]:hover {
+    background-color: #ff6700;
+    color: white;
+    transition: all 2.5s;
+}
+
+/* 第四部分 */
+.content {
+    width: 100%;
+    overflow: hidden;
+}
+
+.content .container1 {
+    width: 1226px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.content .container1 a {
+
+}
+
+.content .container1 a img {
+    width: 1226px;
+    height: 460px;
+}
+
+.content .container1 .category {
+    position: absolute;
+    top: 0px;
+    color: rgba(105, 101, 101, .6);
+    width: 234px;
+    height: 460px;
+    overflow: hidden;
+}
+
+.content .container1 .category ul {
+    margin-top: 20px;
+}
+
+.content .container1 .category ul li {
+    height: 42px;
+    line-height: 42px;
+}
+
+.content .container1 .category ul li a {
+    font-size: 14px;
+    color: white;
+    display: inline-block;
+    height: 42px;
+    line-height: 42px;
+    width: 214px;
+    padding-left: 20px;
+}
+
+.content .container1 .category ul li a:hover {
+    background-color: #ff6700;
+}
+
+.content .container1 .category ul li a strong {
+    font-size: 14px;
+    color: white;
+    float: right;
+    margin-right: 20px;
+}
+
+.content .container2 {
+    width: 1226px;
+    clear: both;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.content .container2 .channel-lst {
+    background-color: #5f5750;
+    width: 234px;
+    height: 170px;
+    float: left;
+}
+
+.content .container2 .channel-lst ul {
+    margin-left: 5px;
+}
+
+.content .container2 .channel-lst ul li {
+    float: left;
+    width: 76px;
+    height: 82px;
+    text-align: center;
+}
+
+.content .container2 .channel-lst ul li a ::before{
+    position: absolute;
+    content: '';
+    background-color: #665e57;
+    top: 5px;
+    left: 6px;
+    width: 64px;
+    height: 10px;
+}
+
+.content .container2 .channel-lst ul li a ::after{
+    position: absolute;
+    content: '';
+    background-color: #665e57;
+    top: 6px;
+    right: 0;
+    width: 1px;
+    height: 70px;
+}
+
+.content .container2 .channel-lst ul li a:hover > img {
+    opacity: 1.0;
+    transition: all 0.3s;
+}
+
+.content .container2 .channel-lst ul li a:hover > span {
+    opacity: 1.0;
+    transition: all 0.3s;
+    color: white;
+}
+
+.content .container2 .channel-lst ul li a img {
+    width: 24px;
+    height: 24px;
+    margin-top: 15px;
+    opacity: 0.7;
+}
+
+.content .container2 .channel-lst ul li a span {
+    display: block;
+    margin-top: -10px;
+}
+
+.content .container2 .channel-ad {
+    float: left;
+}
+
+.content .container2 .channel-ad ul {
+
+}
+
+.content .container2 .channel-ad ul li {
+    float: left;
+    margin-left: 13px;
+}
+
+.content .container2 .channel-ad ul li a {
+
+}
+
+.content .container2 .channel-ad ul li a img {
+    width: 316px;
+    height: 170px;
+}
+

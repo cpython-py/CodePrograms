@@ -1,0 +1,10 @@
+var strvar = "Hello Kitty!";
+console.log(strvar.length);
+var strvar = "  Hello Kitty!  ";
+console.log(strvar);
+console.log(strvar.trim());
+var strvar2 = "Hi lyh!";
+console.log(strvar2.charAt(0));
+console.log(strvar2.indexOf("l"));
+var strvar3 = "HaHa";
+console.log(strvar3.lastIndexOf("H"));
