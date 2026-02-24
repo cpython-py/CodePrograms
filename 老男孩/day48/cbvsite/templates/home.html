@@ -1,0 +1,16 @@
+{% load mytag %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% include 'zhujian.html' %}
+   <h1>这是home页面</h1>
+   <h2>{{ name | xx }}</h2>
+   <h2>{{ name | xx2:'oo' }}</h2>
+   <h1 style="font-size:90px;">{% tag1 11 22 number %}</h1>
+</body>
+</html>

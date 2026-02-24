@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .c1 {
+            background-color: pink;
+            height: 40px;
+        }
+
+        .left-menu {
+            background-color: tan;
+            width: 200px;
+            min-height: 600px;
+        }
+
+        .item {
+            background-color: yellow;
+            height: 40px;
+            border: solid 1px tomato;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: left;
+        }
+    </style>
+
+    {% block css %}
+    
+    {% endblock %}
+</head>
+<div class="nav">
+    <div class="c1">
+        <a href="">32期官网</a>
+        <span>性感荷官,在线发牌</span>
+    </div>
+</div>
+
+<div class="left">
+    <div class="left-menu">
+        <div class="menu1 item"><a href="/t1/">菜单1</a></div>
+        <div class="menu2 item"><a href="/t2/">菜单2</a></div>
+        <div class="menu3 item"><a href="/t3/">菜单3</a></div>
+
+    </div>
+</div>
+
+<div class="right">
+    <div class="content">
+        {% block content %}
+        <h1>基础模板</h1>
+        {% endblock %}
+    </div>
+</div>
+</>
+
+</html>

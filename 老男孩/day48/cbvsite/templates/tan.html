@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="c1">function(){console.log('Hello World!')}</div>
+    <form class="row g-3">
+        <div class="col-auto">
+            <label for="staticEmail2" class="visually-hidden">Email</label>
+            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
+        </div>
+        <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">Password</label>
+            <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+        </div>
+    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3"></div>
+        </div>
+    </div>
+    <script src="{% static '/plugins/jquery.js' %}"></script>
+    <script src="{% static '/plugins/bootstrap/js/bootstrap.min/js' %}"></script>
+</body>
+
+</html>

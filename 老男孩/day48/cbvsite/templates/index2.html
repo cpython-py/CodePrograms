@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      {% comment %} {% for foo in xxx %}
+      <li>{{ foo }}</li>
+      {% empty %}
+      <h2>啥也没有</h2>
+      {% endfor %} {% for key, value in d1.items %}
+      <li>{{ key }} -- {{ value}}</li>
+      {% endfor %}  {% endcomment %}
+      <ul>
+        {% for foo in hobby %}
+            <li>{{ forloop.last }} -> {{ foo }}</li>
+        {% endfor %}
+        <ul>
+            {% for key, value in hobby2.items %} {% for v in value %} 
+            <li>{{ forloop.parentloop.counter }}--{{ forloop.counter}}---{{ v }}</li> {% endfor %}{% endfor %}
+        </ul>
+    </ul>
+  </body>
+</html>
+{% comment %} # TODO {% endcomment %}
