@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block centent_title %}
+<h1>添加书籍</h1>
+{% endblock %}
+
+{% block centent %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">书籍名称</label>
+            <input type="text" class="form-control" id="title" placeholder="书籍名称" name="title">
+        </div> <form action="" method="post">
+{#        {% csrf_token %}#}
+        <div class="form-group">
+            <label for="title">书籍名称</label>
+            <input type="text" class="form-control" id="title" placeholder="书籍名称" name="title">
+        </div>
+        <div class="form-group">
+            <label for="price">价格</label>
+            <input type="text" class="form-control" id="price" placeholder="价格" name="price">
+        </div>
+        <div class="form-group">
+            <label for="pub_date">出版日期</label>
+            <input type="date" class="form-control" id="pub_date" placeholder="出版日期" name="pub_date">
+        </div>
+        <div class="form-group">
+            <label for="publish">出版社</label>
+            <input type="text" class="form-control" id="publish" placeholder="出版社" name="publish">
+        </div>
+
+
+{#        <button type="button" class="btn btn-success">提交</button> type="button"不能提交form表单数据#}
+        <button type="submit" class="btn btn-success">提交</button>
+    </form>
+        <div class="form-group">
+            <label for="price">价格</label>
+            <input type="text" class="form-control" id="price" placeholder="价格" name="price">
+        </div>
+        <div class="form-group">
+            <label for="pub_date">出版日期</label>
+            <input type="date" class="form-control" id="pub_date" placeholder="出版日期" name="pub_date">
+        </div>
+        <div class="form-group">
+            <label for="publish">出版社</label>
+            <input type="text" class="form-control" id="publish" placeholder="出版社" name="publish">
+        </div>
+
+
+        <button type="submit" class="btn btn-success">提交</button>
+    </form>
+{% endblock %}

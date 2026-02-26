@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static './book/plugins/bootstrap.min.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        {% block content_title %}
+            <h1>母版书籍</h1>
+        {% endblock %}
+        <div class="row">
+            <div class= 'col-md-8 col-md-offset-2'>
+                <a href="#" class="btn btn-primary">添加书籍</a>
+                <table class="table table-striped table-hover">
+                    {% block cencent %}
+                        模板内容
+                    {% endblock %}
+                </table>
+            </div>
+        </div>
+    </div>
+        <script src="{% static './book/plugins/jquery.js %'}"></script>
+    <script src="{% static './book/plugins/bootstrap.min.js'}"></script>
+</body>
+
+</html>
