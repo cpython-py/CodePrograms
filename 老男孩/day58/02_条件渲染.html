@@ -1,0 +1,45 @@
+<!--
+ * @Author: cpython-py zero888_666@qq.com
+ * @Date: 2026-02-27 20:39:04
+ * @LastEditors: cpython-py zero888_666@qq.com
+ * @LastEditTime: 2026-02-27 21:07:58
+ * @FilePath: \Code\老男孩\day58\02_条件渲染.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- v-if和v-show -->
+    <div id="app">
+        <a href="" v-if="num>20">百度</a>
+        <a href="" v-else-if="num<20">报道</a>
+        <h1 v-else="">京东</h1>
+        {{ num+1 }}
+        <h2 v-bind:xx="xxattr">xxoo</h2>
+        <h2 :xx="yyattr">yyoo</h2>
+    </div>
+</body>
+
+<script src="./vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                num: 20,
+                xxattr: 'sss',
+                yyattr: 'yyy',
+            }
+        }
+    })
+</script>
+
+</html>

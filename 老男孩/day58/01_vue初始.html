@@ -1,0 +1,41 @@
+<!--
+ * @Author: cpython-py zero888_666@qq.com
+ * @Date: 2026-02-27 19:13:56
+ * @LastEditors: cpython-py zero888_666@qq.com
+ * @LastEditTime: 2026-02-27 20:38:56
+ * @FilePath: \Code\老男孩\day58\01_vue初始.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1 v-html="atag"></h1>
+        <h1 v-text="num+1"></h1>
+    </div>
+
+    <script src="vue.js"></script>
+
+    <script>
+        let vm = new Vue({
+            el: '#app', //通过vue语法来控制id="app"的标签
+            data() {
+                return {
+                    atag: '<a href="http://www.baidu.com">百度</a>',
+                    num: 100,
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

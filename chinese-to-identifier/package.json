@@ -1,0 +1,135 @@
+{
+  "name": "chinese-to-identifier",
+  "displayName": "中文转标识符",
+  "description": "将中文自动翻译成英文并转换为标识符命名格式（大驼峰、小驼峰、下划线等）",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:chineseToIdentifier.toPascalCase",
+    "onCommand:chineseToIdentifier.toCamelCase",
+    "onCommand:chineseToIdentifier.toSnakeCase",
+    "onCommand:chineseToIdentifier.toKebabCase"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "chineseToIdentifier.toPascalCase",
+        "title": "中文转大驼峰 (PascalCase)"
+      },
+      {
+        "command": "chineseToIdentifier.toCamelCase",
+        "title": "中文转小驼峰 (camelCase)"
+      },
+      {
+        "command": "chineseToIdentifier.toSnakeCase",
+        "title": "中文转下划线 (snake_case)"
+      },
+      {
+        "command": "chineseToIdentifier.toKebabCase",
+        "title": "中文转短横线 (kebab-case)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "chineseToIdentifier.toPascalCase",
+        "key": "ctrl+alt+p",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "chineseToIdentifier.toCamelCase",
+        "key": "ctrl+alt+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "chineseToIdentifier.toSnakeCase",
+        "key": "ctrl+alt+s",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "chineseToIdentifier.toKebabCase",
+        "key": "ctrl+alt+k",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "中文转标识符",
+      "properties": {
+        "chineseToIdentifier.translationService": {
+          "type": "string",
+          "default": "google",
+          "enum": ["google", "baidu", "youdao"],
+          "description": "翻译服务选择"
+        },
+        "chineseToIdentifier.baiduAppId": {
+          "type": "string",
+          "default": "",
+          "description": "百度翻译 API App ID"
+        },
+        "chineseToIdentifier.baiduSecretKey": {
+          "type": "string",
+          "default": "",
+          "description": "百度翻译 API Secret Key"
+        },
+        "chineseToIdentifier.youdaoAppKey": {
+          "type": "string",
+          "default": "",
+          "description": "有道翻译 API App Key"
+        },
+        "chineseToIdentifier.youdaoAppSecret": {
+          "type": "string",
+          "default": "",
+          "description": "有道翻译 API App Secret"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "chineseToIdentifier.toPascalCase",
+          "group": "navigation",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "chineseToIdentifier.toCamelCase",
+          "group": "navigation",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "chineseToIdentifier.toSnakeCase",
+          "group": "navigation",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "chineseToIdentifier.toKebabCase",
+          "group": "navigation",
+          "when": "editorHasSelection"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "crypto-js": "^4.2.0"
+  }
+}
