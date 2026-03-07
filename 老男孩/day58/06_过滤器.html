@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ price|yuan }}</h1>
+        <h1>{{ price|keeptwopoints(4) }}</h1>
+        <h1>{{ price|RMB }}</h1>
+        <h1>{{ price|keeptwopoints(2)|RMB }}</h1>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    Vue.filter(    'RMB', function(val) {return val + 'RMB'}    )
+
+    let vm = new Vue({
+        el: '#app',
+        data:{
+            price: 100,
+        },
+        methods: {},
+        filters:{
+            yuan(val){
+                return val + '元'
+            },
+            keeptwopoints(val, n){
+                return val.toFixed(n)
+            }
+        }
+    })
+</script>
+</html>

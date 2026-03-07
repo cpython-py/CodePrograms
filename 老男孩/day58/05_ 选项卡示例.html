@@ -1,0 +1,82 @@
+<!--
+ * @Author: cpython-py zero888_666@qq.com
+ * @Date: 2026-02-27 14:24:09
+ * @LastEditors: cpython-py zero888_666@qq.com
+ * @LastEditTime: 2026-02-27 22:30:41
+ * @FilePath: \Code\老男孩\day58\05_ 选项卡示例.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #card {
+            width: 500px;
+            height: 350px;
+        }
+
+        .title {
+            height: 50px;
+        }
+
+        .title span {
+            width: 100px;
+            height: 50px;
+            background-color: #ccc;
+            display: inline-block;
+            line-height: 50px;
+            /* 设置行和当前元素的高度相等,就可以让文本内容上下居中 */
+            text-align: center;
+        }
+
+        .content .list {
+            width: 500px;
+            height: 300px;
+            background-color: antiquewhite;
+            display: none;
+        }
+
+        .content .active {
+            display: block;
+        }
+
+        .title .current {
+            background-color: tan;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="card">
+        <div class="title">
+            <span @click="num=1" :class="{current:num===1}">国内新闻</span>
+            <span @click="num=2" :class="{current:num===2}">国际新闻</span>
+            <span @click="num=3" :class="{current:num===3}">银河新闻</span>
+            <!--<span>{{num}}</span>-->
+        </div>
+        <div class="content">
+            <div class="list" :class="{active:num===1}">国内新闻列表</div>
+            <div class="list" :class="{active:num===2}">国际新闻列表</div>
+            <div class="list" :class="{active:num===3}">银河新闻列表</div>
+        </div>
+    </div>
+    <script>
+        // 思路：
+        // 当用户点击标题栏的按钮[span]时，显示对应索引下标的内容块[.list]
+        // 代码实现：
+        var card = new Vue({
+            el: "#card",
+            data: {
+                num: 0,
+            },
+        });
+    </script>
+
+</body>
+
+</html>

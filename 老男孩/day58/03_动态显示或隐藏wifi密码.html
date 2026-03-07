@@ -1,0 +1,57 @@
+<!--
+ * @Author: cpython-py zero888_666@qq.com
+ * @Date: 2026-02-27 21:10:51
+ * @LastEditors: cpython-py zero888_666@qq.com
+ * @LastEditTime: 2026-02-27 22:02:00
+ * @FilePath: \Code\老男孩\day58\03_动态显示或隐藏wifi密码.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input :type="tt"><button @click="showp">{{ msg }}</button>
+        <h2 style="float:left;">{{ num }}<button @click="num++" style="float:right;font-size:large;">+1</button></h2>
+        <input type="text" v-model="num">
+        <h1>{{ num }}</h1>
+
+
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                tt: 'password',
+                msg: '显示密码',
+                num: 1,
+            }
+        },
+
+        methods: {
+            showp() {
+                if (this.tt === 'password') {
+                    this.tt = 'text';
+                    this.msg = '隐藏密码';
+                } else {
+                    this.tt = 'password';
+                    this.msg = '显示密码';
+                }
+
+
+            }
+
+        }
+    })
+</script>
+
+</html>

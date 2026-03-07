@@ -1,0 +1,76 @@
+<!--
+ * @Author: cpython-py zero888_666@qq.com
+ * @Date: 2026-02-28 19:22:00
+ * @LastEditors: cpython-py zero888_666@qq.com
+ * @LastEditTime: 2026-02-28 20:10:04
+ * @FilePath: \Code\老男孩\day59\组件.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用子组件 -->
+        <Vheader></Vheader>
+        <Contenta></Contenta>
+        <Ka></Ka>
+    </div>
+</body>
+<script src="vue.js"></script>
+<script>
+    // 声明组件: Vheader (局部组件)
+    let Vheader = {
+        data() {
+            return {
+                nav_list: ['个人中心', '登录', '注册']
+            }
+        },
+        template: '<h1>{{ nav_list }}</h1>'
+    };
+
+    // 声明组件: Contenta (局部组件)
+    let Contenta = {
+        data() {
+            return {
+                content_list: ['xxx', 'ooo',]
+            }
+        },
+        template: '<h1 style="color:red;">{{ content_list }}</h1>'
+    };
+
+    // 声明组件: KK (全局组件)
+    Vue.component('Ka', {
+        data() {
+            return {
+                name: '全局组件',
+            }
+        },
+        template: '<h1 style="color:tan;">{{ name }}</h1>',
+    });
+
+    // 创建 Vue 对象
+    let vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                data: '',
+            }
+        },
+        created() {
+
+        },
+        components: {
+            Vheader, //挂载子组件
+            Contenta, //挂载子组件
+        }
+    })
+</script>
+
+</html>

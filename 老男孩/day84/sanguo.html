@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三国演义 - 经典章节</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimSun", serif;
+            line-height: 1.8;
+            background: #f5f0e6;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fffef9;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        
+        header {
+            text-align: center;
+            border-bottom: 3px double #8b4513;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #8b4513;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        nav {
+            background: #8b4513;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        nav h2 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.4);
+        }
+        
+        .chapter {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #faf8f5;
+            border-left: 4px solid #8b4513;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .chapter-title {
+            color: #8b4513;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .chapter-content {
+            text-align: justify;
+            text-indent: 2em;
+            font-size: 1.05em;
+        }
+        
+        .chapter-content p {
+            margin-bottom: 15px;
+        }
+        
+        .nav-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .nav-link a {
+            color: #8b4513;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 20px;
+            border: 1px solid #8b4513;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link a:hover {
+            background: #8b4513;
+            color: #fff;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            .chapter {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>三国演义</h1>
+            <p class="subtitle">经典章回体小说</p>
+        </header>
+        
+        <nav>
+            <h2>📚 目录导航</h2>
+            <ul>
+                <li><a href="#chapter1">第一回</a></li>
+                <li><a href="#chapter2">第二回</a></li>
+                <li><a href="#chapter3">第三回</a></li>
+                <li><a href="#chapter4">第四回</a></li>
+                <li><a href="#chapter5">第五回</a></li>
+                <li><a href="#chapter6">第六回</a></li>
+                <li><a href="#chapter7">第七回</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <section id="chapter1" class="chapter">
+                <h2 class="chapter-title">第一回·宴桃园豪杰三结义  斩黄巾英雄首立功</h2>
+                <div class="chapter-content">
+                    <p>天功第一  天道变化，消长万汇，契地之力，乃有成尔。天贵而地贱，天动而地静，贵者运机而贱者效力。上有其动，而下行其地矣。是以知天之施地匪专也，知地之应天有常也。生机动则应之以生，气机动则应之以气。机正则泰，机乱则否。万物列形而否泰交著，见之于地焉，岂止地之为乎？盖天道内而地道外者也。</p>
+                    <p>王者，天也；将，地也。将者，天也；士卒，地也。我，天也；敌，地也。由此观其所动，故负胜可知矣。王之於将也，阃外之寄，择贤授柄，举无所疑。将必内应其正，外务其顺。应以正则师律严，务以顺则臣节贞。举而御敌，讵有舆尸之患乎？</p>
+                    <p>地利第二  地之形，险易殊也；地之气，寒热异也。用形与气，在知逆顺焉。昧此道者，不能得地利必矣。善用地者则不然，险而易之，易而险之也。夫居险用险必内溃，居易用易必内蹶。当有形之用，逆之者善矣。</p>
+                    <p>人用第三  今之世取人也，每务其多学而舍其偏技，非良术也。兵家所利，随其长短而用之也。是以善抚恤者勿频斗，虑其劳疲而无勇也；善保守者勿使进攻，虑其迟缓而不猛也...</p>
+                </div>
+                <div class="nav-link">
+                    <a href="#chapter2">下一章 →</a>
+                </div>
+            </section>
+            
+            <section id="chapter2" class="chapter">
+                <h2 class="chapter-title">第二回·张翼德怒鞭督邮    何国舅谋诛宦竖</h2>
+                <div class="chapter-content">
+                    <p>诗云："一局输赢料不真，香销茶尽尚逡巡。欲知目下兴衰兆，须问傍观冷眼人。"却说封肃因听见公差传唤，忙出来陪笑启问。那些人只嚷："快请出甄爷来。"</p>
+                    <p>封肃忙陪笑道："小人姓封，并不姓甄。只有当日小婿姓甄，今已出家一二年了，不知可是问他。"那些公人道："我们也不知什么'真''假'，因奉太爷之命来问你。他既是你女婿，便带了你去亲见太爷面禀，省得『乱』跑。"</p>
+                    <p>说着，不容封肃多言，大家推拥他去了。封家人各各惊慌，不知何兆。那天约二更时，只见封肃方回来，欢天喜地。众人忙问端的，他乃说道："原来本府新升的太爷，姓贾名化，本湖州人氏，曾与女婿旧日相交..."</p>
+                </div>
+                <div class="nav-link">
+                    <a href="#chapter1">← 上一章</a>
+                    <a href="#chapter3">下一章 →</a>
+                </div>
+            </section>
+            
+            <section id="chapter3" class="chapter">
+                <h2 class="chapter-title">第三回·议温明董卓叱丁原  馈金珠李肃说吕布</h2>
+                <div class="chapter-content">
+                    <p>开平元年正月丁亥，帝回自长芦，次于魏州。节度使罗绍威以帝回军，虑有不测之患，由是供亿甚至，因密以天人之望切陈之。帝虽拒而不纳，然心德之。</p>
+                    <p>壬寅，帝至自长芦。是日，有庆云覆于府署之上。甲辰，天子遣御史大夫薛贻矩来传禅代之意。贻矩谒帝，陈北面之礼，帝揖之升阶。贻矩曰："殿下功德及人，三灵所卜已定。皇帝方议裁诏，行舜、禹之事，臣安敢违。"</p>
+                    <p>既而拜伏于砌下，帝侧躬以避之。二月戊申，帝之家庙栋间有五色芝生焉，状若芙蓉，紫烟蒙护，数日不散...</p>
+                </div>
+                <div class="nav-link">
+                    <a href="#chapter2">← 上一章</a>
+                    <a href="#chapter4">下一章 →</a>
+                </div>
+            </section>
+            
+            <section id="chapter4" class="chapter">
+                <h2 class="chapter-title">第四回·废汉帝陈留践位    谋董贼孟德献刀</h2>
+                <div class="chapter-content">
+                    <p>却说黛玉同姊妹们至王夫人处，见王夫人与兄嫂处的来使计议家务，又说姨母家遭了人命官司等语。因见王夫人事情冗杂，姊妹们遂出来至寡嫂李氏房中来了。</p>
+                    <p>原来这李氏即贾珠之妻。珠虽夭亡，幸存一子，取名贾兰，今方五岁，已入学攻书。这李氏亦系金陵名宦之女，父名李守中，曾为国子监祭酒。</p>
+                    <p>如今且说贾雨村，因补授了应天府，一下马，就有一件人命官司详至案下，乃是两家争买一婢，各不相让，以致殴伤人命。彼时雨村即传原告之人来审...</p>
+                </div>
+                <div class="nav-link">
+                    <a href="#chapter3">← 上一章</a>
+                    <a href="#chapter5">下一章 →</a>
+                </div>
+            </section>
+            
+            <section id="chapter5" class="chapter">
+                <h2 class="chapter-title">第五回·发矫诏诸镇应曹公  破关兵三英战吕布</h2>
+                <div class="chapter-content">
+                    <p>诗曰：虽云虎将逞刚强，迷魂法术孰堪当。宋帅慧心推测破，将军方免误伤亡。</p>
+                    <p>当下刘庆闻女将一番辱骂之言，大怒，无名火高发三千丈，大喝："好花言贱婢！你有多大本领，出此大言？阵前若容你上十合，不为好汉！"把坐骑一催，喝声："贱婢休走，看大爷家伙！"一个猛虎争餐架势，把双斧往顶脑砍下。</p>
+                    <p>段小姐见他来得凶勇，也觉惊骇，说声："好一员骁勇宋将！"连忙把双刀架开，这小姐的神力也不弱也，劈面相迎，男女二将一冲一撞，刀斧交锋，叮当响亮，战法不分高下...</p>
+                </div>
+                <div class="nav-link">
+                    <a href="#chapter4">← 上一章</a>
+                    <a href="#chapter6">下一章 →</a>
+                </div>
+            </section>
+            
+            <section id="chapter6" class="chapter">
+                <h2 class="chapter-title">第六回·焚金阙董卓行凶    匿玉玺孙坚背约</h2>
+                <div class="chapter-content">
+                    <p>话说武后分付摆宴，与公主赏花饮酒。次日下诏，命群臣齐赶上苑赏花，大排筵宴。并将九十九种花名，写牙签九十九根，放于筒内。</p>
+                    <p>每掣一签，俱照上面花名做诗一首——武后因前日赏雪，上官婉儿做了许多诗，毫不费力，知他学问非凡。意欲卖弄他的才情，所以也令上官婉儿与群臣一同做诗，先交卷者赐大缎二匹；交卷过迟者，罚酒三巨觥。</p>
+                    <p>谁知一连做了几首，总是上官婉儿第一交卷。这日共做了五十首诗，上宫婉几就得了五十分赏赐...</p>
+                </div>
+                <div class="nav-link">
+                    <a href="#chapter5">← 上一章</a>
+                    <a href="#chapter7">下一章 →</a>
+                </div>
+            </section>
+            
+            <section id="chapter7" class="chapter">
+                <h2 class="chapter-title">第七回·袁绍磐河战公孙    孙坚跨江击刘表</h2>
+                <div class="chapter-content">
+                    <p>项籍者，下相人也，字羽。初起时，年二十四。其季父项梁，梁父即楚将项燕，为秦将王翦所戮者也。项氏世世为楚将，封於项，故姓项氏。</p>
+                    <p>项籍少时，学书不成，去学剑，又不成。项梁怒之。籍曰："书足以记名姓而已。剑一人敌，不足学，学万人敌。"於是项梁乃教籍兵法，籍大喜，略知其意，又不肯竟学。</p>
+                    <p>秦始皇帝游会稽，渡浙江，梁与籍俱观。籍曰："彼可取而代也。"梁掩其口，曰："毋妄言，族矣！"梁以此奇籍...</p>
+                </div>
+                <div class="nav-link">
+                    <a href="#chapter6">← 上一章</a>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>© 三国演义经典章节 | 仅供学习参考</p>
+            <p>📖 阅读愉快</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

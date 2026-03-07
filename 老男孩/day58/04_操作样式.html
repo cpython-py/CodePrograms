@@ -1,0 +1,46 @@
+<!--
+ * @Author: cpython-py zero888_666@qq.com
+ * @Date: 2026-02-27 22:02:04
+ * @LastEditors: cpython-py zero888_666@qq.com
+ * @LastEditTime: 2026-02-27 22:21:15
+ * @FilePath: \Code\老男孩\day58\04_操作样式.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .c1 {
+            color: red;
+        }
+
+        .c2 {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="xx">
+        <p :class="{c1:num<10,c2:num>=10}">床前明月光</p>
+    </div>
+</body>
+
+<script src="./vue.js"></script>
+<script>
+    new Vue({
+        el: '#xx',
+        data() {
+            return {
+                num: 9,
+            }
+        },
+
+    })
+</script>
+
+</html>
