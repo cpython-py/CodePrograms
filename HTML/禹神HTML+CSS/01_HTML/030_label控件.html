@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>label控件</title>
+</head>
+<body>
+    <form action="">
+        <label for="zhanghu">账户: </label>
+        <input id="zhanghu" type="text" name="account" maxlength="10"><br>
+        <label>密码: <input type="password" name="pwd" maxlength="6"><br></label>
+        性别:
+        <input id="nan" type="radio" name="gender" value="male"><label for="nan">男</label>
+        <label><input type="radio" name="gender" value="female">女</label><br>
+        爱好:
+        <label><input type="checkbox" name="hobby" value="smoke">抽烟</label>
+        <label><input type="checkbox" name="hobby" value="drink">喝酒</label>
+        <label><input type="checkbox" name="hobby" value="perm">烫头</label><br>
+        <input type="hidden" name="tag" value="from"><br>
+        <label for="other">其他:<textarea id="other" name="desc" cols="20" rows="3"></textarea></label> <br>
+        籍贯:<select name="place" style="background-color: darkgrey;width: 160px;height: 30px">
+            <option>河南</option>
+            <option>北京</option>
+            <option>上海</option>
+            <option>河北</option>
+            <option>山西</option>
+        </select><br>
+        <input type="submit" value="点我确认">
+        <input type="reset" value="点我重置">
+        <input type="button" value="检测账户是否被注册">
+    </form>
+</body>
+</html>
