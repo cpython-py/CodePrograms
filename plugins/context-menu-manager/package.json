@@ -1,0 +1,268 @@
+{
+  "name": "context-menu-manager",
+  "displayName": "Context Menu Manager",
+  "description": "功能强大的右键菜单管理扩展，支持动态显示/隐藏菜单项，自定义图标、快捷键和执行命令",
+  "version": "1.0.0",
+  "publisher": "context-menu-manager",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "context menu",
+    "right click",
+    "menu manager",
+    "custom menu",
+    "context menu editor"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "contextMenuManager.openConfigPanel",
+        "title": "打开右键菜单配置面板",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "contextMenuManager.addMenuItem",
+        "title": "添加右键菜单项",
+        "icon": "$(add)"
+      },
+      {
+        "command": "contextMenuManager.editMenuItem",
+        "title": "编辑右键菜单项",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "contextMenuManager.deleteMenuItem",
+        "title": "删除右键菜单项",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "contextMenuManager.toggleMenuItem",
+        "title": "启用/禁用菜单项",
+        "icon": "$(toggle)"
+      },
+      {
+        "command": "contextMenuManager.exportConfig",
+        "title": "导出配置",
+        "icon": "$(export)"
+      },
+      {
+        "command": "contextMenuManager.importConfig",
+        "title": "导入配置",
+        "icon": "$(import)"
+      },
+      {
+        "command": "contextMenuManager.resetToDefault",
+        "title": "重置为默认配置",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "contextMenuManager.submenu",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "submenu": "contextMenuManager.submenu",
+          "group": "navigation"
+        }
+      ],
+      "contextMenuManager.submenu": [],
+      "commandPalette": [
+        {
+          "command": "contextMenuManager.openConfigPanel",
+          "group": "Context Menu Manager"
+        },
+        {
+          "command": "contextMenuManager.addMenuItem",
+          "group": "Context Menu Manager"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "contextMenuManager.submenu",
+        "label": "右键菜单管理",
+        "icon": "$(menu)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "contextMenuManager",
+          "title": "右键菜单管理",
+          "icon": "resources/icons/menu-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "contextMenuManager": [
+        {
+          "id": "contextMenuManager.itemsView",
+          "name": "菜单项列表"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Context Menu Manager",
+      "properties": {
+        "contextMenuManager.items": {
+          "type": "array",
+          "default": [],
+          "description": "右键菜单项配置列表",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "菜单项唯一标识符"
+              },
+              "label": {
+                "type": "string",
+                "description": "菜单项显示文本"
+              },
+              "command": {
+                "type": "string",
+                "description": "要执行的命令或脚本"
+              },
+              "icon": {
+                "type": "string",
+                "description": "图标路径或VS Code内置图标名称"
+              },
+              "iconPath": {
+                "type": "string",
+                "description": "自定义SVG图标路径"
+              },
+              "enabled": {
+                "type": "boolean",
+                "default": true,
+                "description": "是否启用此菜单项"
+              },
+              "fileTypes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "适用的文件类型（如 ['.js', '.ts']）"
+              },
+              "projectPaths": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "适用的项目路径"
+              },
+              "conditions": {
+                "type": "object",
+                "properties": {
+                  "when": {
+                    "type": "string",
+                    "description": "显示条件表达式"
+                  },
+                  "hasSelection": {
+                    "type": "boolean",
+                    "description": "是否需要选中文本"
+                  },
+                  "minFiles": {
+                    "type": "number",
+                    "description": "最少文件数量"
+                  }
+                }
+              },
+              "group": {
+                "type": "string",
+                "default": "navigation",
+                "description": "菜单分组"
+              },
+              "shortcut": {
+                "type": "string",
+                "description": "快捷键（如 'ctrl+shift+c'）"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["command", "script", "terminal", "url"],
+                "default": "command",
+                "description": "执行类型"
+              }
+            }
+          }
+        },
+        "contextMenuManager.enableAutoHide": {
+          "type": "boolean",
+          "default": true,
+          "description": "根据文件类型自动隐藏不适用的菜单项"
+        },
+        "contextMenuManager.showIcons": {
+          "type": "boolean",
+          "default": true,
+          "description": "在菜单项中显示图标"
+        },
+        "contextMenuManager.animationEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "启用菜单动画效果"
+        },
+        "contextMenuManager.theme": {
+          "type": "string",
+          "enum": ["default", "dark", "light", "custom"],
+          "default": "default",
+          "description": "菜单主题样式"
+        }
+      }
+    },
+    "keybindings": [],
+    "languages": [
+      {
+        "id": "context-menu-config",
+        "extensions": [
+          ".cmmc"
+        ],
+        "aliases": [
+          "Context Menu Config"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0",
+    "@vscode/test-electron": "^2.3.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/context-menu-manager.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/context-menu-manager/issues"
+  },
+  "homepage": "https://github.com/yourusername/context-menu-manager#readme"
+}

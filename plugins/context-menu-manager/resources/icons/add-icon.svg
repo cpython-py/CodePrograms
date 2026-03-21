@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <defs>
+    <linearGradient id="addGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#66BB6A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#43A047;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 圆形背景 -->
+  <circle cx="12" cy="12" r="11" fill="url(#addGradient)"/>
+  
+  <!-- 加号 -->
+  <g stroke="white" stroke-width="2.5" stroke-linecap="round">
+    <line x1="12" y1="6" x2="12" y2="18"/>
+    <line x1="6" y1="12" x2="18" y2="12"/>
+  </g>
+</svg>
