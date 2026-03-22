@@ -1,0 +1,19 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget
+
+if __name__ == "__main__":
+    # NOTE - 创建QApplication实例
+    app = QApplication(sys.argv)
+    # 创建一个窗口
+    w = QWidget()
+    # 设置窗口大小
+    w.resize(300, 150)
+    # 窗口移动
+    w.move(300, 300)
+    # 窗口标题
+    w.setWindowTitle("第一个基于PyQt5的桌面应用")
+    # 显示窗口
+    w.show()
+    
+    # 进入程序主循环,确保安全结束
+    sys.exit(app.exec_())

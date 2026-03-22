@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>边框相关属性</title>
+    <style>
+        table {
+            border: 2px solid green;
+            table-layout: fixed ; /* 表格列宽 */
+            border-spacing: 0; /* 单元格边框间距 */
+            border-collapse: collapse; /* 合并边框 */
+            empty-cells: hide; /* 隐藏空单元格 */
+            caption-side: bottom; /* 标题位置 */
+        }
+
+        td,
+        th {
+            border: 2px solid orange;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption>人员信息</caption>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>政治面貌 </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>张三</td>
+                <td>23</td>
+                <td>男</td>
+                <td>团员</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>李四</td>
+                <td>24</td>
+                <td>男</td>
+                <td>团员</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>王五</td>
+                <td>25</td>
+                <td></td>
+                <td>团员</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>赵六</td>
+                <td>26</td>
+                <td>男</td>
+                <td>团员</td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+</body>
+</html>

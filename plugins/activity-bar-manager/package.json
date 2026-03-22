@@ -1,0 +1,294 @@
+{
+  "name": "activity-bar-manager",
+  "displayName": "Activity Bar Manager",
+  "description": "功能强大的活动栏管理插件，支持动态添加、删除、隐藏、排序活动栏视图项，自定义视图布局和图标",
+  "version": "1.0.0",
+  "publisher": "activity-bar-tools",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Customization"
+  ],
+  "keywords": [
+    "activity bar",
+    "sidebar",
+    "customization",
+    "layout",
+    "view"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "activityBarManager.openSettings",
+        "title": "打开活动栏设置",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "activityBarManager.toggleViewItem",
+        "title": "切换视图项显示/隐藏"
+      },
+      {
+        "command": "activityBarManager.moveUp",
+        "title": "上移视图项",
+        "icon": "$(arrow-up)"
+      },
+      {
+        "command": "activityBarManager.moveDown",
+        "title": "下移视图项",
+        "icon": "$(arrow-down)"
+      },
+      {
+        "command": "activityBarManager.resetToDefault",
+        "title": "重置为默认布局"
+      },
+      {
+        "command": "activityBarManager.exportConfig",
+        "title": "导出配置"
+      },
+      {
+        "command": "activityBarManager.importConfig",
+        "title": "导入配置"
+      },
+      {
+        "command": "activityBarManager.createProfile",
+        "title": "创建配置文件"
+      },
+      {
+        "command": "activityBarManager.switchProfile",
+        "title": "切换配置文件"
+      },
+      {
+        "command": "activityBarManager.hideAll",
+        "title": "隐藏所有视图项"
+      },
+      {
+        "command": "activityBarManager.showAll",
+        "title": "显示所有视图项"
+      },
+      {
+        "command": "activityBarManager.pinViewItem",
+        "title": "固定视图项"
+      },
+      {
+        "command": "activityBarManager.unpinViewItem",
+        "title": "取消固定视图项"
+      },
+      {
+        "command": "activityBarManager.hideItem",
+        "title": "隐藏此项",
+        "icon": "$(eye-closed)"
+      },
+      {
+        "command": "activityBarManager.showItem",
+        "title": "显示此项",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "activityBarManager.resetItem",
+        "title": "恢复默认状态"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "activityBarManager",
+          "title": "Activity Bar Manager",
+          "icon": "resources/icons/activity-bar.svg"
+        }
+      ]
+    },
+    "views": {
+      "activityBarManager": [
+        {
+          "id": "activityBarManager.mainView",
+          "name": "视图管理"
+        },
+        {
+          "id": "activityBarManager.profilesView",
+          "name": "配置文件"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "activityBarManager.openSettings",
+          "when": "view == activityBarManager.mainView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "activityBarManager.showAll",
+          "when": "view == activityBarManager.mainView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "activityBarManager.resetToDefault",
+          "when": "view == activityBarManager.mainView",
+          "group": "navigation@3"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "activityBarManager.toggleViewItem",
+          "when": "view == activityBarManager.mainView && viewItem =~ /item-.*/",
+          "group": "inline@1"
+        },
+        {
+          "command": "activityBarManager.moveUp",
+          "when": "view == activityBarManager.mainView && viewItem =~ /item-.*/",
+          "group": "inline@2"
+        },
+        {
+          "command": "activityBarManager.moveDown",
+          "when": "view == activityBarManager.mainView && viewItem =~ /item-.*/",
+          "group": "inline@3"
+        },
+        {
+          "command": "activityBarManager.pinViewItem",
+          "when": "view == activityBarManager.mainView && viewItem =~ /item-.*-unpinned/",
+          "group": "actions@1"
+        },
+        {
+          "command": "activityBarManager.unpinViewItem",
+          "when": "view == activityBarManager.mainView && viewItem =~ /item-.*-pinned/",
+          "group": "actions@2"
+        },
+        {
+          "command": "activityBarManager.hideItem",
+          "when": "view == activityBarManager.mainView && viewItem =~ /item-visible.*/",
+          "group": "actions@3"
+        },
+        {
+          "command": "activityBarManager.showItem",
+          "when": "view == activityBarManager.mainView && viewItem =~ /item-hidden.*/",
+          "group": "actions@4"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "activityBarManager.toggleViewItem",
+          "when": "false"
+        },
+        {
+          "command": "activityBarManager.moveUp",
+          "when": "false"
+        },
+        {
+          "command": "activityBarManager.moveDown",
+          "when": "false"
+        },
+        {
+          "command": "activityBarManager.hideItem",
+          "when": "false"
+        },
+        {
+          "command": "activityBarManager.showItem",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Activity Bar Manager",
+      "properties": {
+        "activityBarManager.hiddenItems": {
+          "type": "array",
+          "default": [],
+          "description": "隐藏的活动栏视图项 ID 列表"
+        },
+        "activityBarManager.itemOrder": {
+          "type": "array",
+          "default": [],
+          "description": "活动栏视图项排序顺序"
+        },
+        "activityBarManager.pinnedItems": {
+          "type": "array",
+          "default": [],
+          "description": "固定的活动栏视图项 ID 列表"
+        },
+        "activityBarManager.customIcons": {
+          "type": "object",
+          "default": {},
+          "description": "自定义视图项图标映射"
+        },
+        "activityBarManager.profiles": {
+          "type": "object",
+          "default": {},
+          "description": "配置文件列表"
+        },
+        "activityBarManager.activeProfile": {
+          "type": "string",
+          "default": "default",
+          "description": "当前活动的配置文件"
+        },
+        "activityBarManager.enableWorkspaceSync": {
+          "type": "boolean",
+          "default": true,
+          "description": "启用工作区配置同步"
+        },
+        "activityBarManager.rememberLastActiveView": {
+          "type": "boolean",
+          "default": true,
+          "description": "记住上次活动的视图"
+        },
+        "activityBarManager.lastActiveView": {
+          "type": "string",
+          "default": "",
+          "description": "上次活动的视图 ID"
+        },
+        "activityBarManager.autoHideDelay": {
+          "type": "number",
+          "default": 0,
+          "description": "自动隐藏延迟时间（毫秒，0 表示禁用）"
+        },
+        "activityBarManager.enableAnimations": {
+          "type": "boolean",
+          "default": true,
+          "description": "启用动画效果"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "activityBarManager.openSettings",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a"
+      },
+      {
+        "command": "activityBarManager.switchProfile",
+        "key": "ctrl+alt+p",
+        "mac": "cmd+alt+p"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.57.1",
+    "typescript": "^4.9.5"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-repo/activity-bar-manager.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/your-repo/activity-bar-manager/issues"
+  },
+  "homepage": "https://github.com/your-repo/activity-bar-manager#readme"
+}

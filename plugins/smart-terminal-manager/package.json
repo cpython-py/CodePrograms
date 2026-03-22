@@ -1,0 +1,310 @@
+{
+  "name": "smart-terminal-manager",
+  "displayName": "Smart Terminal Manager",
+  "description": "功能全面的终端管理扩展，支持自定义主题、背景颜色、智能配色、选项卡管理等高级功能",
+  "version": "2.1.0",
+  "publisher": "smart-terminal",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Themes"
+  ],
+  "keywords": [
+    "terminal",
+    "theme",
+    "background",
+    "customization",
+    "tabs"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "smartTerminal.open",
+        "title": "打开终端",
+        "icon": {
+          "light": "resources/icons/light/terminal.svg",
+          "dark": "resources/icons/dark/terminal.svg"
+        }
+      },
+      {
+        "command": "smartTerminal.newTerminal",
+        "title": "新建终端",
+        "icon": {
+          "light": "resources/icons/light/add.svg",
+          "dark": "resources/icons/dark/add.svg"
+        }
+      },
+      {
+        "command": "smartTerminal.runCustomCommand",
+        "title": "运行自定义命令"
+      },
+      {
+        "command": "smartTerminal.manageCommands",
+        "title": "管理自定义命令",
+        "icon": {
+          "light": "resources/icons/light/settings.svg",
+          "dark": "resources/icons/dark/settings.svg"
+        }
+      },
+      {
+        "command": "smartTerminal.applyTheme",
+        "title": "应用主题",
+        "icon": {
+          "light": "resources/icons/light/palette.svg",
+          "dark": "resources/icons/dark/palette.svg"
+        }
+      },
+      {
+        "command": "smartTerminal.createTheme",
+        "title": "创建主题",
+        "icon": {
+          "light": "resources/icons/light/new-theme.svg",
+          "dark": "resources/icons/dark/new-theme.svg"
+        }
+      },
+      {
+        "command": "smartTerminal.quickCommand",
+        "title": "快捷命令面板"
+      },
+      {
+        "command": "smartTerminal.setBackground",
+        "title": "设置终端背景颜色",
+        "icon": {
+          "light": "resources/icons/light/image.svg",
+          "dark": "resources/icons/dark/image.svg"
+        }
+      },
+      {
+        "command": "smartTerminal.clearBackground",
+        "title": "清除终端背景颜色"
+      },
+      {
+        "command": "smartTerminal.smartFontAdjust",
+        "title": "智能字体调整"
+      },
+      {
+        "command": "smartTerminal.toggleTabBar",
+        "title": "切换选项卡栏"
+      },
+      {
+        "command": "smartTerminal.minimizeAllTabs",
+        "title": "最小化所有选项卡",
+        "icon": {
+          "light": "resources/icons/light/minimize.svg",
+          "dark": "resources/icons/dark/minimize.svg"
+        }
+      },
+      {
+        "command": "smartTerminal.restoreAllTabs",
+        "title": "恢复所有选项卡",
+        "icon": {
+          "light": "resources/icons/light/expand.svg",
+          "dark": "resources/icons/dark/expand.svg"
+        }
+      },
+      {
+        "command": "smartTerminal.selectTerminal",
+        "title": "选择终端",
+        "icon": {
+          "light": "resources/icons/light/dropdown.svg",
+          "dark": "resources/icons/dark/dropdown.svg"
+        }
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "smartTerminal",
+          "title": "Smart Terminal",
+          "icon": "resources/icons/terminal-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "smartTerminal": [
+        {
+          "id": "smartTerminal.mainView",
+          "name": "终端管理",
+          "icon": "resources/icons/dark/terminal.svg"
+        },
+        {
+          "id": "smartTerminal.commandsView",
+          "name": "快捷命令",
+          "icon": "resources/icons/dark/command.svg"
+        },
+        {
+          "id": "smartTerminal.themesView",
+          "name": "主题列表",
+          "icon": "resources/icons/dark/palette.svg"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "smartTerminal.newTerminal",
+          "when": "view == smartTerminal.mainView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "smartTerminal.setBackground",
+          "when": "view == smartTerminal.mainView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "smartTerminal.manageCommands",
+          "when": "view == smartTerminal.commandsView",
+          "group": "navigation@1"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "smartTerminal.runCustomCommand",
+          "when": "view == smartTerminal.commandsView && viewItem == command",
+          "group": "inline@1"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "smartTerminal.open",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t"
+      },
+      {
+        "command": "smartTerminal.quickCommand",
+        "key": "ctrl+shift+q",
+        "mac": "cmd+shift+q"
+      },
+      {
+        "command": "smartTerminal.selectTerminal",
+        "key": "ctrl+shift+s",
+        "mac": "cmd+shift+s"
+      }
+    ],
+    "configuration": {
+      "title": "Smart Terminal Manager",
+      "properties": {
+        "smartTerminal.defaultTheme": {
+          "type": "string",
+          "default": "default",
+          "description": "默认终端主题",
+          "enum": ["default", "dark", "ocean", "forest", "sunset", "neon", "dracula", "material", "solarized", "gruvbox", "custom"]
+        },
+        "smartTerminal.fontSize": {
+          "type": "number",
+          "default": 14,
+          "description": "终端字体大小"
+        },
+        "smartTerminal.fontFamily": {
+          "type": "string",
+          "default": "Consolas, 'Courier New', monospace",
+          "description": "终端字体"
+        },
+        "smartTerminal.cursorStyle": {
+          "type": "string",
+          "default": "block",
+          "enum": ["block", "underline", "line"],
+          "description": "光标样式"
+        },
+        "smartTerminal.cursorBlink": {
+          "type": "boolean",
+          "default": true,
+          "description": "光标闪烁"
+        },
+        "smartTerminal.scrollback": {
+          "type": "number",
+          "default": 10000,
+          "description": "终端滚动缓冲区大小"
+        },
+        "smartTerminal.shellPath": {
+          "type": "string",
+          "default": "",
+          "description": "自定义 Shell 路径 (留空使用默认)"
+        },
+        "smartTerminal.autoClose": {
+          "type": "boolean",
+          "default": true,
+          "description": "进程结束后自动关闭终端"
+        },
+        "smartTerminal.customThemes": {
+          "type": "object",
+          "default": {},
+          "description": "自定义主题配置"
+        },
+        "smartTerminal.customCommands": {
+          "type": "array",
+          "default": [],
+          "description": "自定义命令列表",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "command": { "type": "string" },
+              "group": { "type": "string" },
+              "icon": { "type": "string" },
+              "shortcut": { "type": "string" }
+            }
+          }
+        },
+        "smartTerminal.backgroundColor": {
+          "type": "string",
+          "default": "",
+          "description": "终端背景颜色 (十六进制，如 #1e1e1e)"
+        },
+        "smartTerminal.smartFontEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "启用智能字体调整（根据配色方案自动调整）"
+        },
+        "smartTerminal.minFontSize": {
+          "type": "number",
+          "default": 10,
+          "description": "最小字体大小"
+        },
+        "smartTerminal.maxFontSize": {
+          "type": "number",
+          "default": 24,
+          "description": "最大字体大小"
+        },
+        "smartTerminal.tabBarMinimized": {
+          "type": "boolean",
+          "default": false,
+          "description": "选项卡栏是否最小化"
+        },
+        "smartTerminal.showInActivityBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "在活动栏显示图标"
+        },
+        "smartTerminal.enableSmartSuggestions": {
+          "type": "boolean",
+          "default": true,
+          "description": "启用智能命令建议"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4"
+  },
+  "license": "MIT"
+}

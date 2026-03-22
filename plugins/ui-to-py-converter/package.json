@@ -1,0 +1,105 @@
+{
+  "name": "ui-to-py-converter",
+  "displayName": "UI to Py Converter",
+  "description": "将Qt Designer的UI文件转换为Python文件，自动检测Python版本并使用对应的转换工具",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "pyqt",
+    "pyside",
+    "ui",
+    "converter",
+    "qt designer"
+  ],
+  "activationEvents": [
+    "onCommand:uiToPy.convertUiToPy",
+    "onLanguage:xml"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "uiToPy.convertUiToPy",
+        "title": "🎨 Convert UI to Python"
+      },
+      {
+        "command": "uiToPy.convertUiToPyWithPreview",
+        "title": "🎨 Convert UI to Python (Preview)"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "uiToPy.convertUiToPy",
+          "group": "2_python@1",
+          "when": "resourceExtname == .ui"
+        },
+        {
+          "command": "uiToPy.convertUiToPyWithPreview",
+          "group": "2_python@2",
+          "when": "resourceExtname == .ui"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "uiToPy.convertUiToPy",
+          "group": "2_python@1",
+          "when": "resourceExtname == .ui"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "UI to Py Converter",
+      "properties": {
+        "uiToPy.defaultConverter": {
+          "type": "string",
+          "enum": ["auto", "pyqt5", "pyside6", "pyside2", "pyqt6"],
+          "default": "auto",
+          "description": "默认的UI转换工具 (auto为自动检测)"
+        },
+        "uiToPy.outputSuffix": {
+          "type": "string",
+          "default": "_ui",
+          "description": "输出文件后缀 (例如: main.ui -> main_ui.py)"
+        },
+        "uiToPy.showNotification": {
+          "type": "boolean",
+          "default": true,
+          "description": "转换完成后显示通知"
+        },
+        "uiToPy.openAfterConvert": {
+          "type": "boolean",
+          "default": true,
+          "description": "转换完成后自动打开生成的Python文件"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/ui-to-py-converter"
+  },
+  "license": "MIT"
+}

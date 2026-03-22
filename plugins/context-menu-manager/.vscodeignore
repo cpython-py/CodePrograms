@@ -1,0 +1,38 @@
+# 开发文件
+.vscode/**
+.vscode-test/**
+src/**
+.gitignore
+
+# 构建配置
+tsconfig.json
+.eslintrc.json
+
+# 测试
+test/**
+coverage/**
+
+# 文档
+*.md
+!README.md
+LICENSE
+
+# 配置
+.editorconfig
+
+# 临时文件
+*.log
+*.tmp
+node_modules/**
+
+# 源映射
+*.map
+
+# TypeScript
+**/*.ts
+!out/**/*.js
+
+# 其他
+.git/**
+.github/**
+.gitattributes
