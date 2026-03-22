@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <defs>
+    <linearGradient id="editGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFA726;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FB8C00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 圆形背景 -->
+  <circle cx="12" cy="12" r="11" fill="url(#editGradient)"/>
+  
+  <!-- 铅笔图标 -->
+  <g fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 铅笔主体 -->
+    <path d="M 14.5 6.5 L 17.5 9.5 L 10 17 L 7 17 L 7 14 Z"/>
+    <!-- 铅笔尖 -->
+    <path d="M 13.5 7.5 L 16.5 10.5"/>
+  </g>
+  
+  <!-- 小圆点装饰 -->
+  <circle cx="16" cy="8" r="1" fill="white" opacity="0.6"/>
+</svg>

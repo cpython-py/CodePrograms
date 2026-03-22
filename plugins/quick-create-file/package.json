@@ -1,0 +1,79 @@
+{
+  "name": "quick-create-file",
+  "displayName": "Quick Create File",
+  "description": "右键快速创建各种编程语言文件，自动识别文件类型并添加扩展名",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:quickCreateFile.createFile",
+    "onCommand:quickCreateFile.createFileWithExtension"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "quickCreateFile.createFile",
+        "title": "Quick Create File (智能创建)"
+      },
+      {
+        "command": "quickCreateFile.createFileWithExtension",
+        "title": "Quick Create File With Extension (指定扩展名)"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "quickCreateFile.createFile",
+          "group": "navigation@1",
+          "when": "explorerResourceIsFolder || !explorerResourceIsFolder"
+        },
+        {
+          "command": "quickCreateFile.createFileWithExtension",
+          "group": "navigation@2",
+          "when": "explorerResourceIsFolder || !explorerResourceIsFolder"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Quick Create File",
+      "properties": {
+        "quickCreateFile.defaultLanguage": {
+          "type": "string",
+          "default": "javascript",
+          "description": "默认编程语言"
+        },
+        "quickCreateFile.showExtensionInInput": {
+          "type": "boolean",
+          "default": true,
+          "description": "在输入框中显示扩展名提示"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/quick-create-file"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <defs>
+    <linearGradient id="resetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#42A5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E88E5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 圆形背景 -->
+  <circle cx="12" cy="12" r="11" fill="url(#resetGradient)"/>
+  
+  <!-- 刷新箭头 -->
+  <g fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 圆形箭头路径 -->
+    <path d="M 12 6 A 6 6 0 1 1 6 12">
+      <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="2s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- 箭头头部 -->
+    <path d="M 6 12 L 3 9 L 6 6"/>
+  </g>
+</svg>
