@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+    <rect width="16" height="16" rx="3" fill="#f44336"/>
+    <path d="M4 5 L12 5 L12 11 L4 11 Z" fill="#ffebee" stroke="#d32f2f" stroke-width="1"/>
+    <text x="8" y="9" text-anchor="middle" fill="#d32f2f" font-size="6" font-family="Arial, sans-serif">TEST</text>
+</svg>

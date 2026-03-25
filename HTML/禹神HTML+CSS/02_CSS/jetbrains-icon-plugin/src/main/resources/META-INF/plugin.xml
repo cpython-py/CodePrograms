@@ -1,0 +1,52 @@
+<idea-plugin>
+    <id>com.example.modern-icons-plugin</id>
+    <name>Modern Icons</name>
+    <vendor email="support@example.com" url="https://example.com">Example</vendor>
+
+    <description><![CDATA[
+        <h1>Modern Icons for JetBrains IDE</h1>
+        <p>Replace file, folder, and tool window icons with modern, colorful, flat-design icons.</p>
+        <p><b>Features:</b></p>
+        <ul>
+            <li>Modern file icons for common file types</li>
+            <li>Folder icons based on folder names (src, test, resources, etc.)</li>
+            <li>Colorful tool window icons (Project, Structure, Commit, etc.)</li>
+            <li>Configurable via Settings > Appearance & Behavior > Modern Icons</li>
+            <li>Light and dark theme support</li>
+        </ul>
+        <p>Icons are designed to be easily recognizable and improve visual clarity in the IDE.</p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <h2>1.0.0</h2>
+        <ul>
+            <li>Initial release with basic icon replacement</li>
+            <li>Support for 50+ file types</li>
+            <li>Folder icon matching for common directory names</li>
+            <li>Tool window icon replacement</li>
+        </ul>
+    ]]></change-notes>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- File icon provider -->
+        <iconProvider implementation="com.example.modernicons.icon.FileIconProvider"/>
+        <!-- Folder icon provider (can be same as file icon provider) -->
+        <projectViewNodeDecorator implementation="com.example.modernicons.decorator.FolderIconDecorator"/>
+        <!-- Tool window icon replacement (post startup activity) -->
+        <postStartupActivity implementation="com.example.modernicons.toolwindow.ToolWindowIconReplacer"/>
+        <!-- Configuration -->
+        <applicationConfigurable groupId="appearance" displayName="Modern Icons"
+                                id="preferences.modernIcons"
+                                instance="com.example.modernicons.config.ModernIconsConfigurable"/>
+        <applicationService serviceImplementation="com.example.modernicons.config.ModernIconsSettings"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
