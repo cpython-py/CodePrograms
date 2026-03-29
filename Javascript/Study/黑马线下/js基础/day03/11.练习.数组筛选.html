@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let myArray = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7];
+    let newArrayGreatThanEqual10 = [];
+    for (let times = 0; times < myArray.length; times++) {
+        if (myArray[times] >= 10) {
+            newArrayGreatThanEqual10.push(myArray[times])
+        }
+    }
+    document.writeln(newArrayGreatThanEqual10.toString());
+    console.log(newArrayGreatThanEqual10);
+
+    let myArray2 = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7];
+    let newArrayNotInclude0 = [];
+    for (let times = 0; times < myArray2.length; times++) {
+        if (myArray2[times] !== 0) {
+            newArrayNotInclude0.push(myArray2[times])
+        }
+    }
+    console.log(newArrayNotInclude0);
+</script>
+</body>
+</html>

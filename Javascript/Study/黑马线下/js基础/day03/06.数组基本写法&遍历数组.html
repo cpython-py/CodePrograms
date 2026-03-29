@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let myArray = ['100', '120', '130', '140', '150', 'aaaaa'];
+    document.writeln(myArray.toString());
+    document.write(myArray[0]);
+    document.write(myArray[5]);
+    document.write(myArray[-1]);
+    document.write('<br>')
+
+    for (let eachElement in myArray) {
+        document.write(myArray[eachElement])
+        document.write('<br>')
+    }
+
+    for (let times = 0; times < myArray.length; times++) {
+        document.writeln(myArray[times])
+    }
+</script>
+</body>
+</html>

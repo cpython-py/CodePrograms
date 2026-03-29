@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <img src="./images/1.png" alt="picture1">
+<script>
+    const src = ['./images/1.png', './images/2.png', './images/3.png', './images/4.png'];
+    const randIndex = Math.round(Math.random() * (src.length-1));
+    const img = document.querySelector('img');
+    img.src = src[randIndex];
+</script>
+</body>
+</html>

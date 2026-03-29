@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let randInt = Math.round(Math.random() * 10);
+    let getGuessNumber = +prompt('请输入你猜的数字: ');
+    let chance = 3;
+    while (chance) {
+        if (chance === 0) {
+            alert('请重新在试!')
+            break
+        }
+        else if (getGuessNumber < randInt){
+            chance--
+            alert(`小了! 您还剩${chance}次机会`)
+            getGuessNumber = +prompt('请输入你猜的数字: ');
+        } else if (getGuessNumber > randInt) {
+            chance--
+            alert(`大了! 您还剩${chance}次机会`)
+            getGuessNumber = +prompt('请输入你猜的数字: ');
+        } else {
+            alert('恭喜你猜对了')
+            break
+        }
+    }
+</script>
+</body>
+</html>

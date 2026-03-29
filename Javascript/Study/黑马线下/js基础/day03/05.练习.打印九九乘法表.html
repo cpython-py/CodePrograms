@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        span {
+            margin: 5px 5px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    for (let col = 1; col <= 9; col++) {
+        for (let row = 1; row <= col; row++) {
+            document.write(`<span>${col} * ${row} = ${col * row}</span>`)
+        }
+        document.write('<br>')
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="box">这是一个盒子</div>
+    <p class="box tit">这是一个段落
+        <span>我是一个span标签</span>
+    </p>
+    <ul class="nav">
+        <li>我的首页</li>
+        <li>产品介绍</li>
+        <li>练习方式</li>
+    </ul>
+<script>
+    const box = document.querySelector('.box');
+    const p = document.querySelector('p');
+    const tit = document.querySelector('.box.tit');
+    const span = document.querySelector('p span');
+    const nav = document.querySelector('.nav li:last-child');
+
+    console.log(box);
+    console.dir(box);
+    console.dir(p);
+    console.dir(tit);
+    console.dir(span);
+    console.dir(nav);
+</script>
+</body>
+</html>

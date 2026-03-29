@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+        .background-color {
+            background-color: darkgoldenrod;
+        }
+    </style>
+</head>
+<body>
+    <div>这是一串文字</div>
+<script>
+    const div = document.querySelector('div')
+    div.classList.add('red')
+    div.classList.add('background-color')
+    div.classList.remove('background-color')
+    div.classList.toggle('blue')
+    const bool = div.classList.contains('abc')
+    document.writeln(bool)
+</script>
+</body>
+</html>

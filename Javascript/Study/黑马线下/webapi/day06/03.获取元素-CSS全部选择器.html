@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li>我是第01个li</li>
+        <li>我是第02个li</li>
+        <li>我是第03个li</li>
+    </ul>
+    <ol>
+        <li>我是第01个li</li>
+        <li>我是第02个li</li>
+        <li>我是第03个li</li>
+    </ol>
+    <script>
+        const liAll = document.querySelectorAll('ul li');
+        console.log(liAll);
+        for (let i = 0; i < liAll.length; i++) {
+            console.log(liAll[i])
+        }
+        const liAll2 = document.querySelectorAll('li');
+        console.log(liAll2);
+    </script>
+</body>
+</html>
