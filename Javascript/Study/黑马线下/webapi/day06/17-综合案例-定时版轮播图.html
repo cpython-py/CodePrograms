@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>轮播图点击切换</title>
+  <title>综合案例-定时版轮播图</title>
   <style>
     * {
       box-sizing: border-box;
@@ -115,7 +115,7 @@
     </div>
   </div>
   <script>
-    // 1. 初始数据
+    // 初始数据
     const sliderData = [
       { url: './images/slider01.jpg', title: '对人类来说会不会太超前了？', color: 'rgb(100, 67, 68)' },
       { url: './images/slider02.jpg', title: '开启剑与雪的黑暗传说！', color: 'rgb(43, 35, 26)' },
@@ -126,17 +126,54 @@
       { url: './images/slider07.jpg', title: '一站式解决你的电脑配置问题！！！', color: 'rgb(53, 29, 25)' },
       { url: './images/slider08.jpg', title: '谁不想和小猫咪贴贴呢！', color: 'rgb(99, 72, 114)' },
     ]
-
-    const random = Math.floor(Math.random() * sliderData.length)
+    // 获取元素
     const img = document.querySelector('.slider-wrapper img')
-    const footer = document.querySelector('.slider-footer')
     const p = document.querySelector('.slider-footer p')
-    img.src = sliderData[random].url
-    footer.style.backgroundColor = sliderData[random].color
-    p.innerHTML = sliderData[random].title
-    document.querySelector('.active').classList.remove('active')
-    const li = document.querySelector(`.slider-indicator li:nth-child(${random + 1})`)
-    li.classList.add('active')
+    const footer = document.querySelector('.slider-footer')
+
+    // 1. 声明1个变量，利用定时器实现变量++，依次拿到下一个数组中的对象
+    // 1.1 声明变量 i 
+    let i = 0  // 信号量
+
+    // 1.2 开启定时器实现i++
+    setInterval(function () {
+      i++
+      // 无缝衔接 如果播放到了最后一张 第8张，则快速复原为第1张播放
+      // 其实这个8就是数组的长度
+      // if (i >= sliderData.length) {
+      //   i = 0
+      // }
+
+      // 改为三元运算符的写法
+      // i = i >= sliderData.length ? 0 : i
+
+      // 利用取余来实现
+      i = i % sliderData.length
+
+
+      console.log(i)
+      // 1.3 依次拿到下一个数组中的对象
+      // console.log(sliderData[i])
+
+      // 2. 利用对象更换图片、文字、背景颜色、小圆点
+      // 2.1 更换图片
+      img.src = sliderData[i].url
+
+      // 2.2 更换文字内容
+      p.innerText = sliderData[i].title
+
+      // 2.3 更换背景颜色
+      footer.style.backgroundColor = sliderData[i].color
+
+      // 2.4 更换小圆点
+      // 先把以前的 active 类 移除掉  顺序不能颠倒
+      document.querySelector('.slider-indicator .active').classList.remove('active')
+
+      // 添加小圆点
+      document.querySelector(`.slider-indicator li:nth-child(${i + 1})`).classList.add('active')
+
+    }, 1000)
+
   </script>
 </body>
 

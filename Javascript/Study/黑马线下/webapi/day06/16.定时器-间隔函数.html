@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // function setName() {
+    //     console.log('狗哥无敌~')
+    // }
+    //
+    // setInterval(setName, 1000)
+    //
+    // const timerId = setInterval(function () {
+    //     console.log('航哥无敌~~')
+    // }, 1000)
+    // console.log(timerId)
+
+    let num = 0
+    function setName2() {
+        console.log('Hi~')
+        num++
+        if (num === 3) {
+            clearInterval(timerId2)
+        }
+    }
+
+    let timerId2 = setInterval(setName2, 1000)
+</script>
+</body>
+</html>
