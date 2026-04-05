@@ -161,6 +161,161 @@ function getPythonCommand(version?: string): string {
 }
 
 /**
+ * 解析UI文件获取窗口类名和类型
+ */
+function parseUiFile(uiPath: string): { className: string; widgetType: string } {
+    try {
+        const uiContent = fs.readFileSync(uiPath, 'utf8');
+        
+        // 获取窗口类名
+        const classMatch = uiContent.match(/<class>([^<]+)<\/class>/);
+        const className = classMatch ? classMatch[1] : 'MainWindow';
+        
+        // 获取窗口类型
+        let widgetType = 'QWidget';
+        if (uiContent.includes('class="QMainWindow"')) {
+            widgetType = 'QMainWindow';
+        } else if (uiContent.includes('class="QDialog"')) {
+            widgetType = 'QDialog';
+        }
+        
+        return { className, widgetType };
+    } catch {
+        return { className: 'MainWindow', widgetType: 'QWidget' };
+    }
+}
+
+/**
+ * 获取Qt插件路径（用于解决 platform plugin 问题）
+ */
+function getQtPluginPathCode(converter: ConverterType, pythonVersion?: string): string {
+    const qtModule = converter === 'pyqt5' ? 'PyQt5' :
+                     converter === 'pyqt6' ? 'PyQt6' :
+                     converter === 'pyside6' ? 'PySide6' : 'PySide2';
+    
+    // 直接使用动态路径检测，避免编码问题
+    if (converter === 'pyqt5' || converter === 'pyqt6') {
+        return `
+    # 动态获取 Qt 插件路径（解决 platform plugin 问题）
+    try:
+        import os
+        import ${qtModule}
+        plugin_path = os.path.join(os.path.dirname(${qtModule}.__file__), 'Qt5', 'plugins')
+        if os.path.exists(plugin_path):
+            os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
+    except:
+        pass`;
+    } else {
+        // PySide6/PySide2
+        return `
+    # 动态获取 Qt 插件路径（解决 platform plugin 问题）
+    try:
+        import os
+        import ${qtModule}
+        plugin_path = os.path.join(os.path.dirname(${qtModule}.__file__), 'plugins')
+        if os.path.exists(plugin_path):
+            os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
+    except:
+        pass`;
+    }
+}
+
+/**
+ * 生成入口代码
+ */
+function generateEntryCode(
+    uiClassName: string,
+    className: string,
+    widgetType: string,
+    converter: ConverterType,
+    pythonVersion?: string
+): string {
+    const importModule = converter === 'pyqt5' ? 'PyQt5' :
+                         converter === 'pyqt6' ? 'PyQt6' :
+                         converter === 'pyside6' ? 'PySide6' :
+                         'PySide2';
+    
+    const widgetImport = widgetType === 'QMainWindow' ? 'QMainWindow' :
+                         widgetType === 'QDialog' ? 'QDialog' : 'QWidget';
+    
+    const pluginPathCode = getQtPluginPathCode(converter, pythonVersion);
+    
+    let createWindowCode: string;
+    
+    if (widgetType === 'QMainWindow') {
+        createWindowCode = `
+    MainWindow = QMainWindow()
+    ui = ${uiClassName}()
+    ui.setupUi(MainWindow)
+    MainWindow.show()`;
+    } else if (widgetType === 'QDialog') {
+        createWindowCode = `
+    Dialog = QDialog()
+    ui = ${uiClassName}()
+    ui.setupUi(Dialog)
+    Dialog.show()`;
+    } else {
+        createWindowCode = `
+    Widget = QWidget()
+    ui = ${uiClassName}()
+    ui.setupUi(Widget)
+    Widget.show()`;
+    }
+    
+    return `
+if __name__ == "__main__":
+    import sys
+    from ${importModule}.QtWidgets import QApplication, ${widgetImport}
+${pluginPathCode}
+    
+    app = QApplication(sys.argv)
+${createWindowCode}
+    sys.exit(app.exec_())
+`;
+}
+
+/**
+ * 解析生成的Python文件获取UI类名
+ */
+function parsePyFile(pyPath: string): string {
+    try {
+        const pyContent = fs.readFileSync(pyPath, 'utf8');
+        const classMatch = pyContent.match(/class\s+(\w+)\s*\(\s*object\s*\)/);
+        return classMatch ? classMatch[1] : 'Ui_MainWindow';
+    } catch {
+        return 'Ui_MainWindow';
+    }
+}
+
+/**
+ * 添加入口代码到Python文件
+ */
+function addEntryCode(
+    pyPath: string,
+    uiClassName: string,
+    className: string,
+    widgetType: string,
+    converter: ConverterType,
+    pythonVersion?: string
+): void {
+    try {
+        let pyContent = fs.readFileSync(pyPath, 'utf8');
+        
+        // 检查是否已有入口代码
+        if (pyContent.includes('if __name__ == "__main__"')) {
+            return;
+        }
+        
+        const entryCode = generateEntryCode(uiClassName, className, widgetType, converter, pythonVersion);
+        pyContent += entryCode;
+        
+        fs.writeFileSync(pyPath, pyContent, 'utf8');
+    } catch (error) {
+        console.error('添加入口代码失败:', error);
+    }
+}
+
+/**
  * 执行转换
  */
 async function convertUiToPy(
@@ -180,6 +335,15 @@ async function convertUiToPy(
                     message: `转换失败: ${error.message}\n${stderr}`
                 });
             } else {
+                // 解析UI文件获取窗口信息
+                const { className, widgetType } = parseUiFile(uiPath);
+                
+                // 解析生成的Python文件获取UI类名
+                const uiClassName = parsePyFile(pyPath);
+                
+                // 添加入口代码（传入 pythonVersion）
+                addEntryCode(pyPath, uiClassName, className, widgetType, converter, pythonVersion);
+                
                 resolve({
                     success: true,
                     message: `转换成功: ${path.basename(pyPath)}`
