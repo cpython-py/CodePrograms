@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let myArray = [10, 8, 11, 20, 5];
+    for (let i = 0; i < myArray.length-1; i++) {let minIndex = i;
+        for (let j = i+1; j < myArray.length; j++) {
+            if (myArray[j] < myArray[minIndex]) {minIndex = j}}
+        if (minIndex !== i) {let temp = myArray[minIndex];myArray[minIndex] = myArray[i];myArray[i] = temp;}}
+    console.log(myArray);
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="no">第一个id元素</div>
+    <div class="nor">第一个class元素</div>
+    <span>第一个span元素</span>
+    <label>
+        <input type="text" name="pwd">
+    </label>
+    <script>
+    const no = document.getElementById('no');
+    const nor = document.getElementsByClassName('nor');
+    const span = document.getElementsByTagName('span');
+    const pwd = document.getElementsByName('pwd');
+    console.dir(no);
+    console.log(nor);
+    console.dir(nor);
+    console.dir(span);
+    console.dir(pwd);
+</script>
+</body>
+</html>

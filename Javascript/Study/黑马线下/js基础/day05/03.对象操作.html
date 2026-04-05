@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let obj = {
+        uname: 'ironman',
+        use: 'body'
+    }
+    obj.uname = 'superman';
+    document.write(obj.uname);
+    obj.can = function () {document.write('superman can protect person')};
+    obj.can();
+    delete obj.use;
+
+    let goods = {
+        name: '',
+        num: 10010,
+        weight: 0.55,
+        address: '中国大陆'
+    }
+    goods.name = '小米10 plus';
+    goods.color = '粉色';
+
+    document.write(goods.name);
+    document.write(goods.num);
+    document.write(goods.weight);
+    document.write(goods.address);
+    document.write(goods.color);
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // withdraw 取款
+    // deposit 存款
+    let hasMoney = 100;
+    while (true) {
+        let controlNumber = +prompt(
+            `请选择您的操作:
+            1.取款
+            2.存款
+            3.查看余额
+            4.退出`);
+
+        if (controlNumber === 4) {
+            document.write(`滴,您的余额为${hasMoney}元,请节约使用`);
+            break
+        } else if (controlNumber === 1) {
+            let withdrawMoney = +prompt('请输入您要取款的金额: ');
+            hasMoney -= withdrawMoney;
+            // alert(hasMoney);
+        } else if (controlNumber === 2) {
+            let depositMoney = +prompt('请输入您要存款的金额: ');
+            hasMoney += depositMoney;
+            // alert(hasMoney);
+        } else if (controlNumber === 3) {
+            alert(`您的银行卡余额为${hasMoney}`);
+        } else {
+            alert('请输入规定内容');
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let numberArray = [2, 6, 1, 25, 7];
+    let maxNumber = numberArray[0];
+    for (let i = 1; i < numberArray.length; i++) {
+        if (numberArray[i] > maxNumber) {
+            maxNumber = numberArray[i]
+        }
+    }
+    document.write(maxNumber);
+</script>
+</body>
+</html>

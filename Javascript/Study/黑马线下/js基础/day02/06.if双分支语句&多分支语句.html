@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let employeeSalary = +prompt('请输入你期望的薪资: ');
+    if (employeeSalary > 20000) {
+        alert('薪资太高了,公司养不起你!');
+    } else {
+        alert('欢迎入职');
+    }
+
+    let studentScore = +prompt('请输入你的学习成绩: ');
+    if (studentScore > 120) {
+        alert('优等');
+    } else if (studentScore > 80 && studentScore <= 120) {
+        alert('中等');
+    } else if (studentScore > 40 && studentScore <= 80) {
+        alert('良好');
+    } else {
+        alert('差生');
+    }
+</script>
+</body>
+</html>

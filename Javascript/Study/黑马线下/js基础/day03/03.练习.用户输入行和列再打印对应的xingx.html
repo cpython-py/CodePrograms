@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let userInputCol = +prompt('请输入要打印的列数: ');
+    let userInputRow = +prompt('请输入要打印的行数: ');
+    for (let col = 1; col <= userInputCol; col++) {
+        for (let row = 1; row <= userInputRow; row++) {
+            document.write('⭐️')
+        }
+        document.write('<br>')
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>年会抽奖</title>
+  <style>
+    .wrapper {
+      width: 840px;
+      height: 420px;
+      background: url(./images/bg01.jpg) no-repeat center / cover;
+      padding: 100px 250px;
+      box-sizing: border-box;
+    }
+
+    .wrapper span {
+      color: #b10e0d;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <strong>年会抽奖</strong>
+    <h1>一等奖：<span class="one">???</span></h1>
+    <h3>二等奖：<span class="two">???</span></h3>
+    <h5>三等奖：<span class="three">???</span></h5>
+  </div>
+
+  <script>
+      const h1Span = document.querySelector('h1 span');
+      const h3Span = document.querySelector('h3 span');
+      const h5Span = document.querySelector('h5 span');
+      const arr = ['萧炎', '古薰儿', '魂天帝', '唐三', '小舞', '刘远航', '高舒雯'];
+      let randomIndex = Math.round(Math.random() * (arr.length-1))
+      let randomIndex2 = Math.round(Math.random() * (arr.length-1))
+      let randomIndex3 = Math.round(Math.random() * (arr.length-1))
+      for (let i = 0; i <= 3; i++) {
+          h1Span.innerHTML = arr[randomIndex];
+          h3Span.innerHTML = arr[randomIndex2];
+          h5Span.innerHTML = arr[randomIndex3];
+      }
+  </script>
+</body>
+
+</html>

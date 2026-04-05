@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red {
+            color: red;
+            background-image: linear-gradient(aqua, antiquewhite, beige);
+            width: 500px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+        }
+        .blue {
+            color: blue;
+            background-image: linear-gradient(gray, antiquewhite, indianred);
+            width: 200px;
+            height: 300px;
+            text-align: center;
+            line-height: 300px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="red">颜色</div>
+<script>
+    const div = document.querySelector('div')
+    const color = ['red', 'blue']
+    const randIndex = Math.floor(Math.random() * color.length)
+    div.className = color[randIndex]
+</script>
+</body>
+</html>

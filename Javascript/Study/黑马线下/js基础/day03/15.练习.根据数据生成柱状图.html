@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0c143d;
+    }
+
+    .box {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      width: 800px;
+      min-height: 300px;
+      border-left: 1px solid #4b578f;
+      border-bottom: 1px solid #4b578f;
+      margin: 0 auto;
+      padding-top: 50px;
+      text-align: center;
+      color: #9799ab;
+    }
+
+    .box>div {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 40px;
+      height: 0;
+      background: linear-gradient(#3c99ff, #4489d0, #2283e4);
+      cursor: pointer;
+      border-radius: 8px 8px 0 0;
+      transition: all .2s;
+    }
+
+    .box>div:hover {
+
+      animation: bg .5s alternate infinite;
+
+    }
+
+    @keyframes bg {
+      to {
+        box-shadow: 0 5px 29px rgb(53 111 226 / 88%);
+        background: linear-gradient(#3c99ff, #68aff6, #2283e4);
+      }
+    }
+
+    .box>div::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      height: 10px;
+      background-color: #4b578f;
+      transform: translate(-50%, 100%);
+    }
+
+    .box div span {
+      width: 60px;
+      margin: -30px 0 -5px -6px;
+    }
+
+    .box div h4 {
+      width: 70px;
+      margin: 0 0 -35px -10px;
+    }
+
+    .title {
+      margin-top: 50px;
+      text-align: center;
+      color: #9799ab;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+      let heightPxSeason1 = prompt('请输入您第一季度的收入: ');
+      let heightPxSeason2 = prompt('请输入您第二季度的收入: ');
+      let heightPxSeason3 = prompt('请输入您第三季度的收入: ');
+      let heightPxSeason4 = prompt('请输入您第四季度的收入: ');
+      document.write('<h3 class="title">2099年季度销售数额（单位万）</h3>');
+      document.write('<div class="box">');
+      document.write(`
+<div style="height: ${heightPxSeason1}px;" title=第1季度-${heightPxSeason1}万">
+<span>${heightPxSeason1}万</span>
+<h4>第一季度</h4>
+</div>`);
+      document.write(`
+<div style="height: ${heightPxSeason2}px;" title=第2季度-${heightPxSeason2}万">
+<span>${heightPxSeason2}万</span>
+<h4>第二季度</h4>
+</div>`);
+      document.write(`
+<div style="height: ${heightPxSeason3}px;" title=第3季度-${heightPxSeason3}万">
+<span>${heightPxSeason3}万</span>
+<h4>第三季度</h4>
+</div>`);
+      document.write(`
+<div style="height: ${heightPxSeason4}px;" title=第4季度-${heightPxSeason4}万">
+<span>${heightPxSeason4}万</span>
+<h4>第四季度</h4>
+</div>`);
+      document.write('</div>');
+  </script>
+</body>
+
+</html>

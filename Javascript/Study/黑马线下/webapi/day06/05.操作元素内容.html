@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>我是div</div>
+    <span>我是span</span>
+<script>
+    const div = document.querySelector('div');
+    div.innerText = '新的';
+    console.log(div.innerText);
+    const span = document.querySelector('span');
+    span.innerHTML = '<h1>老的</h1>';
+    console.log(span.innerHTML);
+</script>
+</body>
+</html>
