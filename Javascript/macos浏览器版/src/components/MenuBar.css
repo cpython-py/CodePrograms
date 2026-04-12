@@ -1,0 +1,151 @@
+.menubar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--menubar-height);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: var(--blur-background);
+  -webkit-backdrop-filter: var(--blur-background);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  z-index: 10000;
+}
+
+.menubar-left,
+.menubar-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.menu-item {
+  position: relative;
+  padding: 2px 10px;
+  border-radius: 4px;
+  cursor: default;
+  transition: background 0.15s ease;
+}
+
+.menu-item:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.menu-label {
+  font-size: 13px;
+  color: #000;
+  font-weight: 400;
+}
+
+.apple-icon {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+  padding: 4px 0;
+  animation: menuFadeIn 0.15s ease;
+}
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.submenu-item {
+  padding: 4px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+  font-size: 13px;
+  transition: background 0.1s ease;
+}
+
+.submenu-item:hover {
+  background: #007aff;
+  color: white;
+}
+
+.submenu-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 4px 10px;
+}
+
+.menubar-icon {
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.15s ease;
+}
+
+.menubar-icon:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.menubar-icon.time {
+  font-size: 12px;
+  color: #000;
+  gap: 8px;
+}
+
+.battery-text {
+  font-size: 11px;
+}
+
+.time-display {
+  font-weight: 500;
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  .menubar {
+    background: rgba(30, 30, 30, 0.75);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .menu-label,
+  .menubar-icon.time {
+    color: #fff;
+  }
+  
+  .menu-item:hover,
+  .menubar-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .submenu {
+    background: rgba(40, 40, 40, 0.95);
+  }
+  
+  .submenu-item:hover {
+    background: #007aff;
+  }
+  
+  .submenu-divider {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
