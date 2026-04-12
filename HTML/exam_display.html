@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>河南省洛阳市创新发展联盟2022-2023学年高二下学期3月联考生物试题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 试卷头部信息 */
+        .paper-header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .paper-title {
+            font-size: 24px;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .paper-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .meta-item .icon {
+            font-size: 16px;
+        }
+
+        .meta-item.subject {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .meta-item.type {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        /* 操作按钮区 */
+        .paper-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102,126,234,0.4);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #495057;
+            border: 1px solid #dee2e6;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(56,239,125,0.4);
+        }
+
+        /* 题目区域 */
+        .questions-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #1a1a2e;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .question-item {
+            padding: 25px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .question-item:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transform: translateX(5px);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 18px;
+            min-width: 30px;
+        }
+
+        .question-source {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .question-content {
+            font-size: 16px;
+            color: #2d3436;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .question-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .options-list {
+            margin-left: 30px;
+        }
+
+        .option-item {
+            display: block;
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #495057;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .option-item:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .option-label {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        /* 题目操作按钮 */
+        .question-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #dee2e6;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #6c757d;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* 页脚 */
+        .paper-footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .paper-header, .questions-section {
+                padding: 20px;
+            }
+
+            .paper-title {
+                font-size: 18px;
+            }
+
+            .paper-meta {
+                gap: 10px;
+            }
+
+            .meta-item {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .paper-actions {
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+
+            .question-item {
+                padding: 15px;
+            }
+
+            .question-content {
+                font-size: 14px;
+            }
+
+            .options-list {
+                margin-left: 15px;
+            }
+
+            .option-item {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+
+            .question-actions {
+                gap: 8px;
+            }
+
+            .action-btn {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .paper-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .paper-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .question-actions {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* 加载动画 */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        /* 工具提示 */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 10px;
+            background: #333;
+            color: white;
+            font-size: 12px;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 试卷头部信息 -->
+        <header class="paper-header">
+            <h1 class="paper-title">河南省洛阳市创新发展联盟2022-2023学年高二下学期3月联考生物试题</h1>
+            
+            <div class="paper-meta">
+                <span class="meta-item subject">
+                    <span class="icon">📚</span>
+                    高中生物学
+                </span>
+                <span class="meta-item type">
+                    <span class="icon">📝</span>
+                    月考试卷
+                </span>
+                <span class="meta-item">
+                    <span class="icon">📅</span>
+                    更新时间：2023-04-11
+                </span>
+                <span class="meta-item">
+                    <span class="icon">👁️</span>
+                    浏览次数：43
+                </span>
+                <span class="meta-item">
+                    <span class="icon">🏆</span>
+                    高二年级
+                </span>
+            </div>
+
+            <div class="paper-actions">
+                <button class="btn btn-primary" onclick="downloadPaper()">
+                    <span>📥</span>下载试卷
+                </button>
+                <button class="btn btn-secondary" onclick="downloadAnswerCard()">
+                    <span>📋</span>下载答题卡
+                </button>
+                <button class="btn btn-success" onclick="collectPaper()">
+                    <span>⭐</span>收藏试卷
+                </button>
+                <button class="btn btn-secondary" onclick="sharePaper()">
+                    <span>🔗</span>分享试卷
+                </button>
+                <button class="btn btn-secondary" onclick="viewAnalysis()">
+                    <span>📊</span>试卷分析
+                </button>
+                <button class="btn btn-secondary" onclick="addToBasket()">
+                    <span>🧺</span>全部加入试题篮
+                </button>
+            </div>
+        </header>
+
+        <!-- 题目区域 -->
+        <main class="questions-section">
+            <h2 class="section-title">一、单选题</h2>
+
+            <!-- 第1题 -->
+            <article class="question-item">
+                <div class="question-header">
+                    <span class="question-number">1.</span>
+                    <span class="question-source">2023高二下·洛阳月考</span>
+                </div>
+                <div class="question-content">
+                    某研究小组利用标记重捕法调查某地区（5公顷）某种鸟类的种群密度，第一次捕获并标记a只，第二次捕获b只，其中带标记的有c只，标记物不影响该种鸟类的生存和活动。下列叙述正确的是（    ）
+                </div>
+                <div class="options-list">
+                    <label class="option-item">
+                        <span class="option-label">A.</span>
+                        <span class="option-text">出生率和死亡率是该种群最基本的数量特征</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">B.</span>
+                        <span class="option-text">若标记物易脱落，该方法计算出的种群密度偏小</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">C.</span>
+                        <span class="option-text">性别比例和年龄结构都会影响种群数量的变化</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">D.</span>
+                        <span class="option-text">通过该方法可计算出种群密度为每公顷ab/c只</span>
+                    </label>
+                </div>
+                <div class="question-actions">
+                    <a href="#" class="action-btn" onclick="viewAnswer(53535391)">
+                        <span>📝</span>答案解析
+                    </a>
+                    <a href="#" class="action-btn" onclick="collectQuestion(53535391)">
+                        <span>⭐</span>收藏
+                    </a>
+                    <a href="#" class="action-btn" onclick="reportError(53535391)">
+                        <span>⚠️</span>纠错
+                    </a>
+                    <a href="#" class="action-btn" onclick="addToSelection(53535391)">
+                        <span>➕</span>选题
+                    </a>
+                </div>
+            </article>
+
+            <!-- 第2题 -->
+            <article class="question-item">
+                <div class="question-header">
+                    <span class="question-number">2.</span>
+                    <span class="question-source">2023高二下·洛阳月考</span>
+                </div>
+                <div class="question-content">
+                    为保护森林群落，应坚持生态优先、绿色发展，切实维护生态安全，筑牢绿色屏障。有关森林群落的叙述，错误的是（    ）
+                </div>
+                <div class="options-list">
+                    <label class="option-item">
+                        <span class="option-label">A.</span>
+                        <span class="option-text">与草原群落相比，森林群落结构复杂且相对稳定</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">B.</span>
+                        <span class="option-text">森林群落中，树栖和攀援生活的动物种类较多</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">C.</span>
+                        <span class="option-text">森林群落的外貌和结构可能会随季节发生有规律的变化</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">D.</span>
+                        <span class="option-text">同一森林群落中，不同种群的环境容纳量都相同</span>
+                    </label>
+                </div>
+                <div class="question-actions">
+                    <a href="#" class="action-btn" onclick="viewAnswer(53535392)">
+                        <span>📝</span>答案解析
+                    </a>
+                    <a href="#" class="action-btn" onclick="collectQuestion(53535392)">
+                        <span>⭐</span>收藏
+                    </a>
+                    <a href="#" class="action-btn" onclick="reportError(53535392)">
+                        <span>⚠️</span>纠错
+                    </a>
+                    <a href="#" class="action-btn" onclick="addToSelection(53535392)">
+                        <span>➕</span>选题
+                    </a>
+                </div>
+            </article>
+
+            <!-- 第3题 -->
+            <article class="question-item">
+                <div class="question-header">
+                    <span class="question-number">3.</span>
+                    <span class="question-source">2023高二下·洛阳月考</span>
+                </div>
+                <div class="question-content">
+                    下图表示某林区在遭受大火烧毁后草本植物、灌木和乔木植物的恢复情况。在恢复过程中，有关叙述错误的是（    ）
+                    <img src="//tikupic.21cnjy.com/2023/03/28/21/9c/219c90a6b2a086368a38bc43337befff_528x268.png" alt="题目图片">
+                </div>
+                <div class="options-list">
+                    <label class="option-item">
+                        <span class="option-label">A.</span>
+                        <span class="option-text">群落的垂直结构和水平结构均会发生变化</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">B.</span>
+                        <span class="option-text">群落中的所有种群的生态位不会发生变化</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">C.</span>
+                        <span class="option-text">群落的物种丰富度增加，营养结构不断复杂化</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">D.</span>
+                        <span class="option-text">乔木植物的形成有利于耐阴植物的生长</span>
+                    </label>
+                </div>
+                <div class="question-actions">
+                    <a href="#" class="action-btn" onclick="viewAnswer(53535393)">
+                        <span>📝</span>答案解析
+                    </a>
+                    <a href="#" class="action-btn" onclick="collectQuestion(53535393)">
+                        <span>⭐</span>收藏
+                    </a>
+                    <a href="#" class="action-btn" onclick="reportError(53535393)">
+                        <span>⚠️</span>纠错
+                    </a>
+                    <a href="#" class="action-btn" onclick="addToSelection(53535393)">
+                        <span>➕</span>选题
+                    </a>
+                </div>
+            </article>
+
+            <!-- 第4题 -->
+            <article class="question-item">
+                <div class="question-header">
+                    <span class="question-number">4.</span>
+                    <span class="question-source">2023高二下·洛阳月考</span>
+                </div>
+                <div class="question-content">
+                    下列有关生态系统的组成成分的说法，错误的是（    ）
+                </div>
+                <div class="options-list">
+                    <label class="option-item">
+                        <span class="option-label">A.</span>
+                        <span class="option-text">有些细菌属于生产者</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">B.</span>
+                        <span class="option-text">分解者可能是真菌、细菌等</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">C.</span>
+                        <span class="option-text">植物不一定是生产者，动物都是消费者</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">D.</span>
+                        <span class="option-text">蛔虫等寄生型动物属于消费者</span>
+                    </label>
+                </div>
+                <div class="question-actions">
+                    <a href="#" class="action-btn" onclick="viewAnswer(53535394)">
+                        <span>📝</span>答案解析
+                    </a>
+                    <a href="#" class="action-btn" onclick="collectQuestion(53535394)">
+                        <span>⭐</span>收藏
+                    </a>
+                    <a href="#" class="action-btn" onclick="reportError(53535394)">
+                        <span>⚠️</span>纠错
+                    </a>
+                    <a href="#" class="action-btn" onclick="addToSelection(53535394)">
+                        <span>➕</span>选题
+                    </a>
+                </div>
+            </article>
+
+            <!-- 第5题 -->
+            <article class="question-item">
+                <div class="question-header">
+                    <span class="question-number">5.</span>
+                    <span class="question-source">2023高二下·洛阳月考</span>
+                </div>
+                <div class="question-content">
+                    近海水域的无机盐的浓度显著高于远洋区域，下图表示这两个区域的不同水深处的藻类固定太阳能的数值。下列说法正确的是（    ）
+                    <img src="//tikupic.21cnjy.com/2023/03/28/90/1a/901a45a737071ea4e6e97aa376c0046e_399x345.png" alt="题目图片">
+                </div>
+                <div class="options-list">
+                    <label class="option-item">
+                        <span class="option-label">A.</span>
+                        <span class="option-text">①表示近海水域，②表示远洋区域，近海水域的藻类种群密度大于远洋区域</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">B.</span>
+                        <span class="option-text">①表示近海水域，②表示远洋区域，远洋区域的藻类种群密度大于近海水域</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">C.</span>
+                        <span class="option-text">①表示远洋区域，②表示近海水域，近海水域的藻类种群密度大于远洋区域</span>
+                    </label>
+                    <label class="option-item">
+                        <span class="option-label">D.</span>
+                        <span class="option-text">①表示远洋区域，②表示近海水域，远洋区域的藻类种群密度大于近海水域</span>
+                    </label>
+                </div>
+                <div class="question-actions">
+                    <a href="#" class="action-btn" onclick="viewAnswer(53535395)">
+                        <span>📝</span>答案解析
+                    </a>
+                    <a href="#" class="action-btn" onclick="collectQuestion(53535395)">
+                        <span>⭐</span>收藏
+                    </a>
+                    <a href="#" class="action-btn" onclick="reportError(53535395)">
+                        <span>⚠️</span>纠错
+                    </a>
+                    <a href="#" class="action-btn" onclick="addToSelection(53535395)">
+                        <span>➕</span>选题
+                    </a>
+                </div>
+            </article>
+
+            <!-- 更多题目可以继续添加 -->
+            <div class="loading">
+                <p>— 试卷内容展示中 —</p>
+                <p style="margin-top: 10px; font-size: 12px; color: #999;">完整试卷共包含20道单选题及综合题</p>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="paper-footer">
+            <p>© 2023 在线组卷系统 | 试卷编号：5154033</p>
+        </footer>
+    </div>
+
+    <script>
+        // 下载试卷
+        function downloadPaper() {
+            alert('正在准备下载试卷...\n试卷编号：5154033');
+            // 实际应用中可以调用API下载
+        }
+
+        // 下载答题卡
+        function downloadAnswerCard() {
+            alert('正在准备下载答题卡...');
+        }
+
+        // 收藏试卷
+        function collectPaper() {
+            alert('试卷已收藏！');
+        }
+
+        // 分享试卷
+        function sharePaper() {
+            const url = window.location.href;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('链接已复制到剪贴板！');
+                });
+            } else {
+                alert('分享链接：' + url);
+            }
+        }
+
+        // 查看试卷分析
+        function viewAnalysis() {
+            alert('正在加载试卷分析...');
+        }
+
+        // 全部加入试题篮
+        function addToBasket() {
+            alert('已将全部试题加入试题篮！');
+        }
+
+        // 查看答案解析
+        function viewAnswer(questionId) {
+            alert('正在加载答案解析...\n题目编号：' + questionId);
+        }
+
+        // 收藏题目
+        function collectQuestion(questionId) {
+            alert('题目已收藏！');
+        }
+
+        // 纠错
+        function reportError(questionId) {
+            alert('请描述题目错误内容...\n题目编号：' + questionId);
+        }
+
+        // 添加到选题
+        function addToSelection(questionId) {
+            alert('已添加到选题！');
+        }
+
+        // 选项点击效果
+        document.querySelectorAll('.option-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // 移除同一题目其他选项的选中状态
+                const parent = this.closest('.options-list');
+                parent.querySelectorAll('.option-item').forEach(opt => {
+                    opt.style.background = 'white';
+                    opt.style.color = '#495057';
+                });
+                // 设置当前选项为选中状态
+                this.style.background = '#667eea';
+                this.style.color = 'white';
+            });
+        });
+    </script>
+</body>
+</html>
