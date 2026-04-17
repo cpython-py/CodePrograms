@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            text-align: center;
+            line-height: 200px;
+            color: azure;
+        }
+  </style>
+</head>
+<body>
+    <div class="box">狗哥球场无敌</div>
+    <script>
+        const div = document.querySelector('div')
+        div.addEventListener('click', function () {
+            console.log('无敌')})
+        div.addEventListener('mouseenter', function () {
+            console.log('我经过了div')})
+        div.addEventListener('mouseleave', function () {
+            console.log('悄悄地我走了')
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="father">
+        <div class="son1">son1</div>
+        <div class="son2">son2</div>
+    </div>
+<script>
+    const father = document.querySelector('.father')
+    document.querySelector('.son2').addEventListener('click', function () {
+        father.remove()
+    })
+</script>
+</body>
+</html>

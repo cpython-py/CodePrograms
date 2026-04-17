@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 匹配字符串的规则
+    const str = '狗哥球场无敌,三分必进~'
+    // 使用正则
+    // 1. 定义规则  /内容/
+    const reg = /马超/
+    // 2. 使用规则 正则.test(需要校验的字符串) 
+    // 如果字符串中存在这个正则的字符就是true否则就是false
+    const result = reg.test(str)
+    console.log(result)
+  </script>
+</body>
+
+</html>

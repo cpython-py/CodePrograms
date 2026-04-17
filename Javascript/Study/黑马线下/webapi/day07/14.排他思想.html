@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active {
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <button class="active">按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+<script>
+    const btns = document.querySelectorAll('button')
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('mouseenter', function () {
+            for (let j = 0; j < btns.length; j++) {
+            btns[j].classList.remove('active')
+        }
+        this.classList.add('active')
+        })
+    }
+</script>
+</body>
+</html>

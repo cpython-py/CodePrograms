@@ -1,0 +1,151 @@
+.launchpad {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: launchpadOpen 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.launchpad.closing {
+  animation: launchpadClose 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.launchpad-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.launchpad-content {
+  position: relative;
+  width: 80%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.launchpad-search {
+  margin-bottom: 30px;
+}
+
+.launchpad-search-input {
+  width: 200px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  text-align: center;
+}
+
+.launchpad-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.launchpad-search-input:focus {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.launchpad-apps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 30px 20px;
+  width: 100%;
+  justify-items: center;
+}
+
+.launchpad-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.launchpad-app:hover {
+  transform: scale(1.1);
+}
+
+.launchpad-app:active {
+  transform: scale(0.95);
+}
+
+.launchpad-app-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-bottom: 8px;
+}
+
+.launchpad-icon-emoji {
+  font-size: 36px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.launchpad-app-name {
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.launchpad-dots {
+  margin-top: 30px;
+  display: flex;
+  gap: 8px;
+}
+
+.launchpad-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: background 0.15s ease;
+}
+
+.launchpad-dot.active {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .launchpad-apps {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 20px 15px;
+  }
+  
+  .launchpad-app-icon {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .launchpad-icon-emoji {
+    font-size: 28px;
+  }
+  
+  .launchpad-app-name {
+    font-size: 11px;
+  }
+}

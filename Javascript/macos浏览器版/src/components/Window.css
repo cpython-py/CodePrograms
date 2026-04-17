@@ -1,0 +1,427 @@
+.window {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--window-radius);
+  box-shadow: var(--shadow-window);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: auto;
+  animation: windowOpen 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-radius 0.2s ease;
+}
+
+.window.closing {
+  animation: windowClose 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.window.active {
+  box-shadow: 0 25px 80px 8px rgba(0, 0, 0, 0.6);
+}
+
+.window-header {
+  height: 38px;
+  background: linear-gradient(180deg, #f6f6f6 0%, #e8e8e8 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  cursor: move;
+  flex-shrink: 0;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.15s ease;
+}
+
+.control .icon {
+  font-size: 10px;
+  color: transparent;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.window:hover .control .icon {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.control.close {
+  background: #ff5f57;
+}
+
+.control.minimize {
+  background: #ffbd2e;
+}
+
+.control.maximize {
+  background: #28c840;
+}
+
+.control:hover {
+  filter: brightness(0.9);
+}
+
+.window-title {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+}
+
+.window-content {
+  flex: 1;
+  overflow: auto;
+  background: #fff;
+}
+
+.window-resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 15px;
+  height: 15px;
+  cursor: nwse-resize;
+}
+
+/* 应用内容通用样式 */
+.app-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.app-content.default {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.app-content.default h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Safari */
+.app-content.safari {
+  flex-direction: column;
+}
+
+.safari-toolbar {
+  padding: 8px;
+  background: #f6f6f6;
+  border-bottom: 1px solid #ddd;
+}
+
+.url-bar {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+}
+
+.url-bar:focus {
+  border-color: #007aff;
+}
+
+.safari-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.safari-start {
+  text-align: center;
+  color: #666;
+}
+
+.safari-start h2 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Messages */
+.app-content.messages {
+  display: flex;
+}
+
+.messages-sidebar {
+  width: 200px;
+  background: #f6f6f6;
+  border-right: 1px solid #ddd;
+  padding: 8px;
+}
+
+.conversation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.conversation.active {
+  background: #007aff;
+  color: white;
+}
+
+.messages-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.avatar {
+  font-size: 24px;
+}
+
+/* Mail */
+.app-content.mail {
+  display: flex;
+}
+
+.mail-sidebar {
+  width: 150px;
+  background: #f6f6f6;
+  border-right: 1px solid #ddd;
+  padding: 8px;
+}
+
+.mail-folder {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.mail-folder.active {
+  background: #007aff;
+  color: white;
+}
+
+.mail-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+/* Settings */
+.app-content.settings {
+  display: flex;
+}
+
+.settings-sidebar {
+  width: 200px;
+  background: #f6f6f6;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+}
+
+.settings-item {
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.settings-item.active {
+  background: #007aff;
+  color: white;
+}
+
+.settings-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.settings-main h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.settings-option {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: #f6f6f6;
+  border-radius: 8px;
+}
+
+/* Music */
+.app-content.music {
+  display: flex;
+}
+
+.music-sidebar {
+  width: 180px;
+  background: #f6f6f6;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+}
+
+.music-section {
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.music-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.music-main h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Photos */
+.app-content.photos {
+  display: flex;
+}
+
+.photos-sidebar {
+  width: 180px;
+  background: #f6f6f6;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+}
+
+.photos-section {
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.photos-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.photos-main h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Maps */
+.app-content.maps {
+  display: flex;
+}
+
+.maps-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8e8e8;
+}
+
+.maps-placeholder {
+  text-align: center;
+  color: #666;
+}
+
+.maps-icon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* 深色模式 */
+@media (prefers-color-scheme: dark) {
+  .window {
+    background: rgba(30, 30, 30, 0.95);
+  }
+  
+  .window-header {
+    background: linear-gradient(180deg, #3a3a3a 0%, #2d2d2d 100%);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .window-title {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  
+  .window-content {
+    background: #1e1e1e;
+  }
+  
+  .app-content.default,
+  .app-content.safari .safari-start,
+  .app-content.mail .mail-content,
+  .app-content.music .music-main,
+  .app-content.photos .photos-main {
+    color: #999;
+  }
+  
+  .app-content.default h2,
+  .safari-start h2,
+  .settings-main h2,
+  .music-main h2,
+  .photos-main h2 {
+    color: #fff;
+  }
+  
+  .safari-toolbar,
+  .messages-sidebar,
+  .mail-sidebar,
+  .settings-sidebar,
+  .music-sidebar,
+  .photos-sidebar {
+    background: #2d2d2d;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .url-bar {
+    background: #1e1e1e;
+    border-color: #444;
+    color: #fff;
+  }
+  
+  .conversation.active,
+  .mail-folder.active,
+  .settings-item.active,
+  .music-section:hover,
+  .photos-section:hover {
+    background: #007aff;
+  }
+  
+  .settings-option {
+    background: #2d2d2d;
+    color: #fff;
+  }
+}

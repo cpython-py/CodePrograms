@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>按钮</button>
+<script>
+    const btn = document.querySelector('button')
+    btn.addEventListener('click', function () {
+        clearTimeout(timer)
+    })
+    let timer = setTimeout(function () {
+        console.log('我是输出')
+    }, 5000)
+    console.log('我是延迟函数后面的代码')
+</script>
+</body>
+</html>

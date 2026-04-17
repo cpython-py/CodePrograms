@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="text">
+    <br>
+    <input type="password" value="123456">
+    <br>
+    <input type="radio">男
+    <br>
+    <button>按钮</button>
+    <br>
+    <select>
+        <option id="bj">北京</option>
+        <option id="sh">上海</option>
+    </select>
+<script>
+    const uname = document.querySelector('[type="text"]')
+    console.dir(uname)
+    uname.value = '张三'
+    const pwd = document.querySelector('[value="123456"]')
+    console.dir(pwd)
+    pwd.type = 'text'
+    const radio = document.querySelector('[type="radio"]')
+    radio.checked = true
+    const btn = document.querySelector('button')
+    btn.disabled = true
+    const option = document.querySelector('#sh')
+    option.selected = true
+</script>
+</body>
+</html>

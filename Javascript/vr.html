@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>上海全景 VR - 陆家嘴夜景</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: #000;
+        }
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            pointer-events: none;
+            font-size: 18px;
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+        #info h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+        #info p {
+            font-size: 14px;
+            margin-top: 0;
+            opacity: 0.7;
+        }
+        #controls-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            z-index: 10;
+            pointer-events: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+        #vr-button {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 20;
+            background: rgba(20, 30, 50, 0.8);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 40px;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+            border: 1px solid rgba(100, 180, 255, 0.3);
+        }
+        #vr-button:hover {
+            background: rgba(60, 100, 170, 0.9);
+            border-color: rgba(200, 220, 255, 0.6);
+            box-shadow: 0 0 20px rgba(70, 130, 255, 0.4);
+            transform: scale(1.02);
+        }
+        #vr-button:active {
+            transform: scale(0.98);
+        }
+        .credit {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            z-index: 10;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            pointer-events: none;
+        }
+        @media (max-width: 600px) {
+            #info h1 { font-size: 20px; }
+            #info p { font-size: 12px; }
+            #vr-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <!-- 引入 Three.js 核心库与扩展 -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="info">
+        <h1>🌆 上海 · 陆家嘴金融区</h1>
+        <p>鼠标拖动查看全景 | 滚动缩放 | 点击右下角进入 VR 模式</p>
+    </div>
+    <div id="controls-hint">
+        🖱️ 拖动查看周围 · 滚轮缩放 · 触摸设备可用手势
+    </div>
+    <div class="credit">全景图由 AI 生成 · 上海外滩视角</div>
+    <button id="vr-button">🥽 进入 VR 模式</button>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { VRButton } from 'three/addons/webxr/VRButton.js';
+
+        // --- 初始化场景、相机、渲染器 ---
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x050510); // 深空蓝
+
+        // 创建透视相机 (视野90度, 自动适配宽高比, 近远裁面)
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 0.1); // 将相机置于球体中心
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // 限制最高2倍，保证性能
+        renderer.xr.enabled = true; // 启用 WebXR
+        document.body.appendChild(renderer.domElement);
+
+        // --- 添加 VR 按钮 ---
+        document.body.appendChild(VRButton.createButton(renderer));
+
+        // 手动将我们自定义的按钮与 VR 功能关联 (隐藏默认按钮，用我们的样式)
+        const defaultVRButton = document.querySelector('button');
+        if (defaultVRButton) {
+            defaultVRButton.style.display = 'none';
+        }
+
+        document.getElementById('vr-button').addEventListener('click', () => {
+            // 查找 Three.js 生成的 VR 按钮并模拟点击
+            const vrBtn = document.querySelector('button');
+            if (vrBtn) {
+                vrBtn.click();
+            } else {
+                // 如果找不到，直接进入 VR 会话
+                renderer.xr.getSession().then(session => {
+                    if (!session) {
+                        // 如果还没有会话，通过标准方式进入
+                        navigator.xr.requestSession('immersive-vr', {
+                            optionalFeatures: ['local-floor', 'bounded-floor']
+                        }).then(session => {
+                            renderer.xr.setSession(session);
+                        });
+                    }
+                }).catch(() => {});
+            }
+        });
+
+        // 隐藏 Three.js 默认生成的按钮（我们用自己的样式）
+        setTimeout(() => {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                if (btn.textContent.includes('VR') || btn.textContent.includes('AR')) {
+                    btn.style.display = 'none';
+                }
+            });
+        }, 100);
+
+        // --- 轨道控制器 (用于非 VR 模式下的鼠标交互) ---
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = true;
+        controls.zoomSpeed = 0.8;
+        controls.enablePan = false;
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.rotateSpeed = 0.8;
+        controls.minDistance = 0.1;
+        controls.maxDistance = 0.1; // 锁定在球心
+        controls.target.set(0, 0, 0);
+
+        // --- 创建一个程序化生成的上海全景纹理 (避免外部图片加载失败) ---
+        function createShanghaiPanoramaTexture() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // 全景图标准比例 2:1，提高分辨率使细节更清晰
+            const width = 4096;
+            const height = 2048;
+            canvas.width = width;
+            canvas.height = height;
+
+            // 1. 绘制天空渐变 (从上到下)
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, height * 0.5);
+            skyGrad.addColorStop(0, '#0a0e2a');      // 深空蓝
+            skyGrad.addColorStop(0.3, '#1a2a5e');    // 中蓝
+            skyGrad.addColorStop(0.5, '#3a5a8a');    // 浅蓝
+            skyGrad.addColorStop(0.7, '#6a9ac0');    // 天际线蓝
+            skyGrad.addColorStop(0.85, '#b0c8e0');   // 地平线亮色
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, width, height * 0.5);
+
+            // 2. 绘制黄浦江水面 (下半部分)
+            const waterGrad = ctx.createLinearGradient(0, height * 0.45, 0, height);
+            waterGrad.addColorStop(0, '#1a3a5c');
+            waterGrad.addColorStop(0.3, '#0f2a4a');
+            waterGrad.addColorStop(0.7, '#0a1e3a');
+            waterGrad.addColorStop(1, '#050d1a');
+            ctx.fillStyle = waterGrad;
+            ctx.fillRect(0, height * 0.45, width, height * 0.55);
+
+            // 3. 绘制水波纹效果
+            ctx.strokeStyle = 'rgba(100, 180, 255, 0.15)';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 40; i++) {
+                const y = height * 0.5 + i * 15;
+                ctx.beginPath();
+                for (let x = 0; x < width; x += 40) {
+                    const offset = Math.sin(x * 0.005 + i * 0.5) * 5;
+                    if (x === 0) ctx.moveTo(x, y + offset);
+                    else ctx.lineTo(x, y + offset);
+                }
+                ctx.stroke();
+            }
+
+            // 4. 绘制远处城市剪影 (浦东陆家嘴天际线)
+            ctx.fillStyle = '#0a1525';
+
+            // 定义几个标志性建筑轮廓 (相对位置，在0到1之间)
+            const skylinePoints = [];
+            const centerX = width * 0.5;
+            const baseY = height * 0.48;
+
+            // 东方明珠 (左中)
+            const pearlTower = {
+                x: centerX - width * 0.08,
+                draw: (x) => {
+                    const h1 = 120, h2 = 180, h3 = 140;
+                    const w1 = 30, w2 = 20, w3 = 10;
+                    // 主体
+                    ctx.fillRect(x - 15, baseY - 300, 30, 300);
+                    // 球体
+                    ctx.beginPath();
+                    ctx.arc(x, baseY - 300, 25, 0, Math.PI * 2);
+                    ctx.fillStyle = '#1a2a4a';
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x, baseY - 230, 18, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(x, baseY - 170, 12, 0, Math.PI * 2);
+                    ctx.fill();
+                    // 天线
+                    ctx.fillStyle = '#2a3a5a';
+                    ctx.fillRect(x - 3, baseY - 350, 6, 50);
+                }
+            };
+
+            // 上海中心大厦 (中右)
+            const shanghaiTower = {
+                x: centerX + width * 0.05,
+                draw: (x) => {
+                    // 螺旋上升效果
+                    ctx.fillStyle = '#1e3050';
+                    for (let i = 0; i < 12; i++) {
+                        const yOffset = i * 25;
+                        const widthOffset = 40 - i * 2;
+                        ctx.save();
+                        ctx.translate(x, baseY - 20 - yOffset);
+                        ctx.rotate(i * 0.1);
+                        ctx.fillRect(-widthOffset/2, -12, widthOffset, 25);
+                        ctx.restore();
+                    }
+                    ctx.fillStyle = '#2a4060';
+                    ctx.fillRect(x - 15, baseY - 320, 30, 20);
+                }
+            };
+
+            // 金茂大厦 (左)
+            const jinmao = {
+                x: centerX - width * 0.15,
+                draw: (x) => {
+                    ctx.fillStyle = '#1a2845';
+                    for (let i = 0; i < 8; i++) {
+                        const yOffset = i * 30;
+                        const widthOffset = 35 - i * 3;
+                        ctx.fillRect(x - widthOffset/2, baseY - 20 - yOffset, widthOffset, 25);
+                    }
+                    // 尖顶
+                    ctx.beginPath();
+                    ctx.moveTo(x - 10, baseY - 260);
+                    ctx.lineTo(x + 10, baseY - 260);
+                    ctx.lineTo(x, baseY - 300);
+                    ctx.closePath();
+                    ctx.fillStyle = '#2a3a5a';
+                    ctx.fill();
+                }
+            };
+
+            // 环球金融中心 (右)
+            const swfc = {
+                x: centerX + width * 0.18,
+                draw: (x) => {
+                    ctx.fillStyle = '#1e2e4a';
+                    ctx.fillRect(x - 18, baseY - 280, 36, 280);
+                    // 顶部梯形开口
+                    ctx.fillStyle = '#0a1525';
+                    ctx.beginPath();
+                    ctx.moveTo(x - 12, baseY - 280);
+                    ctx.lineTo(x + 12, baseY - 280);
+                    ctx.lineTo(x + 8, baseY - 260);
+                    ctx.lineTo(x - 8, baseY - 260);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            };
+
+            // 绘制所有建筑
+            const drawBuilding = (building, offsetX = 0) => {
+                building.draw(building.x + offsetX);
+            };
+
+            // 主视角建筑 (正前方)
+            drawBuilding(pearlTower);
+            drawBuilding(shanghaiTower);
+            drawBuilding(jinmao);
+            drawBuilding(swfc);
+
+            // 左侧建筑群
+            drawBuilding({...jinmao, x: centerX - width * 0.25});
+            drawBuilding({...swfc, x: centerX - width * 0.32, draw: (x) => {
+                ctx.fillStyle = '#152238';
+                ctx.fillRect(x - 12, baseY - 200, 24, 200);
+            }});
+
+            // 右侧建筑群
+            drawBuilding({...shanghaiTower, x: centerX + width * 0.25, draw: (x) => {
+                ctx.fillStyle = '#1a2845';
+                ctx.fillRect(x - 15, baseY - 250, 30, 250);
+            }});
+            drawBuilding({...pearlTower, x: centerX + width * 0.35, draw: (x) => {
+                ctx.fillStyle = '#162842';
+                ctx.fillRect(x - 10, baseY - 180, 20, 180);
+                ctx.beginPath();
+                ctx.arc(x, baseY - 190, 15, 0, Math.PI * 2);
+                ctx.fill();
+            }});
+
+            // 5. 绘制窗户灯光 (远处)
+            ctx.fillStyle = '#ffe080';
+            for (let i = 0; i < 300; i++) {
+                const x = Math.random() * width;
+                const y = baseY - 20 - Math.random() * 280;
+                if (y > height * 0.3 && y < baseY - 20) {
+                    ctx.globalAlpha = 0.3 + Math.random() * 0.5;
+                    ctx.fillRect(x, y, 2, 3);
+                }
+            }
+            ctx.globalAlpha = 1.0;
+
+            // 6. 添加光晕和星星
+            ctx.fillStyle = '#ffffff';
+            for (let i = 0; i < 400; i++) {
+                const x = Math.random() * width;
+                const y = Math.random() * height * 0.4;
+                const size = Math.random() * 2 + 0.5;
+                ctx.globalAlpha = 0.4 + Math.random() * 0.6;
+                ctx.fillRect(x, y, size, size);
+            }
+
+            // 7. 添加月亮
+            ctx.globalAlpha = 1.0;
+            const moonX = width * 0.75;
+            const moonY = height * 0.2;
+            const moonGrad = ctx.createRadialGradient(moonX-5, moonY-5, 5, moonX, moonY, 30);
+            moonGrad.addColorStop(0, '#fffde8');
+            moonGrad.addColorStop(0.8, '#c0c8d8');
+            moonGrad.addColorStop(1, 'transparent');
+            ctx.fillStyle = moonGrad;
+            ctx.beginPath();
+            ctx.arc(moonX, moonY, 25, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 8. 添加水面的倒影光
+            ctx.fillStyle = 'rgba(255, 240, 160, 0.08)';
+            for (let i = 0; i < 20; i++) {
+                const x = centerX - 100 + i * 30;
+                ctx.beginPath();
+                ctx.moveTo(x, height * 0.5);
+                ctx.lineTo(x + 40, height * 0.5);
+                ctx.lineTo(x + 20, height * 0.7);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            // 返回纹理
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.colorSpace = THREE.SRGBColorSpace;
+            texture.minFilter = THREE.LinearFilter;
+            texture.magFilter = THREE.LinearFilter;
+            return texture;
+        }
+
+        // --- 创建全景球体 ---
+        // 使用程序生成的上海全景纹理，保证任何环境下都能显示
+        const texture = createShanghaiPanoramaTexture();
+
+        const geometry = new THREE.SphereGeometry(500, 64, 64);
+        const material = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.BackSide // 内表面显示
+        });
+
+        const sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+
+        // --- 添加一些漂浮粒子作为氛围 (可选) ---
+        const particlesGeo = new THREE.BufferGeometry();
+        const particlesCount = 2000;
+        const posArray = new Float32Array(particlesCount * 3);
+        for(let i = 0; i < particlesCount * 3; i += 3) {
+            // 随机分布在半径为 400 的球体内，但靠近边缘
+            const r = 350 + Math.random() * 150;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos((Math.random() * 2) - 1);
+            posArray[i] = Math.sin(phi) * Math.cos(theta) * r;
+            posArray[i+1] = Math.sin(phi) * Math.sin(theta) * r;
+            posArray[i+2] = Math.cos(phi) * r;
+        }
+        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMat = new THREE.PointsMaterial({
+            size: 0.5,
+            color: 0x88aaff,
+            transparent: true,
+            opacity: 0.5,
+            blending: THREE.AdditiveBlending
+        });
+        const particles = new THREE.Points(particlesGeo, particlesMat);
+        scene.add(particles);
+
+        // --- 动画循环 ---
+        function animate() {
+            // 在非VR模式下启用阻尼效果
+            if (!renderer.xr.isPresenting) {
+                controls.update();
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        renderer.setAnimationLoop(animate);
+
+        // --- 窗口大小自适应 ---
+        window.addEventListener('resize', onWindowResize, false);
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // --- 处理移动端手势 (已由 OrbitControls 处理，无需额外代码) ---
+
+        console.log('✨ 上海全景 VR 已加载 - 点击右下角按钮进入沉浸模式');
+    </script>
+</body>
+</html>

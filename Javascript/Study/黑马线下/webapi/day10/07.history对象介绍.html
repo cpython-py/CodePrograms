@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="https://www.itcast.cn">传智首页</a>
+    <button class="forward">前进</button>
+    <button class="back">后退</button>
+<script>
+    document.querySelector('.forward').addEventListener('click', function () {
+        // history.forward()
+        history.go(1)
+    })
+    document.querySelector('.back').addEventListener('click', function () {
+        // history.back()
+        history.go(-1)
+    })
+</script>
+</body>
+</html>

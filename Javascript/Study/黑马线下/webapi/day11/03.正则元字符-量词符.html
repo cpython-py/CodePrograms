@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02.正则元字符-量词符</title>
+</head>
+
+<body>
+  <script>
+    // 量词符
+    // 1. * 重复出现零次或多次
+    console.log(/^哈*$/.test('哈')) // true
+    console.log(/^哈*$/.test('')) // true
+    console.log('------------------')
+    // 2. + 出现一次或多次
+    console.log(/^哈+$/.test('')) // false
+    console.log(/^哈+$/.test('哈哈')) // true
+    console.log(/^哈+$/.test('呵呵呵')) // false
+    console.log('------------------')
+    // 3. ? 出现 0 或 1 次
+    console.log(/^哈?$/.test('')) // true
+    console.log(/^哈?$/.test('哈哈')) // false
+    console.log(/^哈?$/.test('呵呵呵')) // false
+    console.log('------------------')
+    // 4. {n} 出现 n 次
+    console.log(/^哈{2}$/.test('')) // false
+    console.log(/^哈{2}$/.test('哈哈')) // true
+    console.log(/^哈{2}$/.test('呵呵呵')) // false
+    console.log('------------------')
+    // 5. {n,} 出现n次及以上
+    console.log(/^哈{2,}$/.test('')) // false
+    console.log(/^哈{2,}$/.test('哈哈')) // true
+    console.log(/^哈{2,}$/.test('呵呵呵')) // false
+    console.log('------------------')
+    // 6. {n,m} 出现n次到m次包含 n 和 m
+    console.log(/^哈{2,5}$/.test('')) // false
+    console.log(/^哈{2,5}$/.test('哈哈')) // true
+    console.log(/^哈{2,5}$/.test('呵呵呵')) // false
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const str = '今天天气好晴朗, 处处好风光, 天气晴, 36度, web, WEB'
+    // 需求: 将字符串中的 天气 提换成 心情
+    // 语法=> 字符串.replace(正则, 替换字符)
+    // const result = str.replace(/天气/g, '心情')
+    const res = str.replace(/web/gi, '前端')
+    console.log(res)
+    // g 表示全局匹配
+    // i 表示不区分大小写
+  </script>
+</body>
+
+</html>

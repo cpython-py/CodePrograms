@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="text" class="one">
+    <br><br>
+    <input type="text" class="two">
+    <script>
+        const one = document.querySelector('.one')
+        const two = document.querySelector('.two')
+
+        // focus 事件:获取焦点
+        one.addEventListener('focus', function () {
+            console.log('狗哥666')
+        })
+        // blur 事件:失去焦点
+        one.addEventListener('blur', function () {
+            console.log('狗哥失恋了')
+        })
+        // element.focus()自动获取焦点
+        two.focus()
+    </script>
+</body>
+</html>
