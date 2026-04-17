@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            min-height: 3000px;
+        }
+        div {
+            width: 300px;
+            height: 100px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        1
+        <br>
+        1
+        <br>
+        1
+        <br>
+        1
+        <br>
+        1
+        <br>
+         1
+        <br>
+        1
+        <br>
+        1
+        <br>
+        1
+        <br>
+        1
+        <br>
+         1
+        <br>
+        1
+        <br>
+        1
+        <br>
+        1
+        <br>
+        1
+        <br>
+         1
+        <br>
+        1
+        <br>
+        1
+        <br>
+        1
+        <br>
+        1
+        <br>
+    </div>
+<script>
+    console.log(document.documentElement)
+    window.addEventListener('scroll', function () {
+        console.log('...')
+        const top = document.documentElement.scrollTop
+        const left = document.documentElement.scrollLeft
+        console.log(top)
+        console.log(left)
+    })
+    const div = document.querySelector('div')
+    div.addEventListener('scroll', function () {
+        console.log('2...')
+    })
+</script>
+</body>
+</html>

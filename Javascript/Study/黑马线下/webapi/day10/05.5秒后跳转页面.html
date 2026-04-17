@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="https://www.jd.com">支付成功后2秒后跳转页面</a>
+<script>
+    const a = document.querySelector('a')
+    let num = 2
+    let timer = setInterval(function () {
+        num--
+        a.innerHTML = `支付成功后${num}秒跳转页面`
+        if (num <= 0) {
+            clearInterval(timer)
+             location.href = 'https://www.jd.com'
+        }
+    }, 2000)
+</script>
+</body>
+</html>

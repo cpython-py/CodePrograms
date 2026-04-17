@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div></div>
+  <script>
+    const tel = '18311112222'
+    // 需求: 隐藏 手机号 中间四位
+    const reg = /^(\d{3})\d{4}(\d{4})$/
+    // 在 replace 方法中 有一个关键字 $1 代表正则中的第一个小括号的内容 依次类推
+    // const res = tel.replace(reg, '$1****$2')
+    // 字符串.repeat(数字) 将字符串重复多少次
+    // const res = tel.replace(reg, `$1${'*'.repeat(4)}$2`)
+    // console.log(res)
+
+    // 升级版 => 我只想显示前三个
+    const res = tel.replace(reg, `$1${'*'.repeat(8)}`)
+    console.log(res)
+
+    document.querySelector('div').innerHTML = `恭喜收集号码为${res}的用户,获得一个鸡蛋~`
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

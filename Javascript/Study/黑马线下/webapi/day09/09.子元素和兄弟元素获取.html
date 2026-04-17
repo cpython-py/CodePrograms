@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li>我是第1个li</li>
+    <li>我是第2个li</li>
+    <li>我是第3个li</li>
+    <li>我是第4个li</li>
+    <li>我是第5个li</li>
+</ul>
+<script>
+    const ul = document.querySelector('ul')
+    console.log(ul.children)
+    console.log(ul.children[2].previousElementSibling.innerHTML)
+    console.log(ul.children[2].nextElementSibling.innerHTML)
+</script>
+</body>
+</html>

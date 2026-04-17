@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="https://www.itcast.cn">传智</a>
+    <form action="https://www.itcast.cn">
+        <button>提交</button>
+    </form>
+<script>
+    const a = document.querySelector('a')
+    const form = document.querySelector('form')
+    a.addEventListener('click', function (e) {
+        e.preventDefault()
+    })
+    form.addEventListener('submit', function (e) {
+        e.preventDefault()
+    })
+</script>
+</body>
+</html>

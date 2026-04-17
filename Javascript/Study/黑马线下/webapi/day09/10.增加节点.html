@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div><i>我是第一个</i></div>
+<script>
+    const div = document.querySelector('div')
+    const span = document.createElement('span')
+    const span2 = document.createElement('span')
+    span.innerHTML = 'Hello!'
+    span2.innerHTML = 'Hi!'
+    div.append(span)
+    div.prepend(span2)
+</script>
+</body>
+</html>
