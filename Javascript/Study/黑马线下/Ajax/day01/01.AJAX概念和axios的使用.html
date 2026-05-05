@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div></div>
+<script src="../axios.min.js"></script>
+<script>
+    const div = document.querySelector('div')
+  axios({
+      url: 'http://ajax-api.itheima.net/api/province'
+  }).then((result) => {
+      console.log(result.data.data)
+      const data = result.data.data
+      div.innerHTML = data.join('<br>')
+  })
+
+
+</script>
+</body>
+</html>

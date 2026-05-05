@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Document</title>
+</head>
+
+<body>
+
+<div id="app">
+    <!-- 
+      v-model 可以让数据和视图，形成双向数据绑定
+      (1) 数据变化，视图自动更新
+      (2) 视图变化，数据自动更新
+      可以快速[获取] 或 [设置]表单元素的内容
+     -->
+    姓名：<input type="text" v-model="uname"/><br/>
+
+    性别：
+    <input name="sex" type="radio" value="男" v-model="gender"/>男生
+    <input name="sex" type="radio" value="女" v-model="gender"/>女生<br/>
+
+    爱好：
+    <input name="hobby" type="checkbox" value="吃" v-model="hobby"/>吃饭
+    <input name="hobby" type="checkbox" value="睡" v-model="hobby"/>睡觉
+    <input name="hobby" type="checkbox" value="玩" v-model="hobby"/>打豆豆<br/>
+
+    籍贯：
+    <select v-model="address">
+        <option value="北京">北京市</option>
+        <option value="上海">上海市</option>
+        <option value="天津">天津市</option>
+    </select><br/>
+
+    记住我：<input type="checkbox" v-model="remember"/>
+</div>
+
+<script src="../js/vue-2.7.14.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            uname: 'laotang',
+            gender: '男',
+            address: '上海',
+            remember: true,
+            hobby: ['吃', '睡']
+        }
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            display: inline-block;
+            width: 50px;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="app">
+    <span>姓：</span><input type="text" v-model="xing"><br><br>
+    <span>名：</span><input type="text" v-model="ming"><br><br>
+    <span>姓名：</span><input type="text" :value="fullName"><br/>
+</div>
+<script src="../js/vue-2.7.14.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            xing: '尼古拉斯',
+            ming: '赵四'
+        },
+        computed: {
+            fullName: {
+                get() {return this.xing + '.' + this.ming},
+                set(val) {
+                    let arr = val.split('.')
+                    this.xing = arr[0]
+                    this.ming = arr[1]
+                }
+            }
+        }
+    })
+</script>
+</body>
+
+</html>

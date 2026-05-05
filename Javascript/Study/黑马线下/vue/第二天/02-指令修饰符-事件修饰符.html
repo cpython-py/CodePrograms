@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Document</title>
+    <style>
+        .father {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            margin-top: 20px;
+        }
+
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+
+    <h3> @事件名.stop → 阻止冒泡</h3>
+    <div class="father" @click="fn1">
+        <div class="son" @click.stop="fn2">儿子</div>
+    </div>
+
+    <h3>@事件名.prevent → 阻止默认行为</h3>
+    <a href="http://www.baidu.com" @click.prevent="fn3">阻止默认行为</a>
+</div>
+<script src="../js/vue-2.7.14.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        methods: {
+            fn1 () {
+                console.log('父盒子')
+            },
+            fn2 () {
+                console.log('子盒子')
+            },
+            fn3 () {
+                console.log('此方法阻止默认行为')}
+        }
+    })
+</script>
+</body>
+
+</html>

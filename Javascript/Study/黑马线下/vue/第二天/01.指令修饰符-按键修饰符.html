@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>监听键盘事件</h2>
+    <input type="text" @keyup.enter="fn">
+</div>
+
+<script src="../js/vue-2.7.14.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        methods: {
+            fn () {
+                console.log('事件触发了')
+            }
+        }
+    })
+</script>
+</body>
+</html>

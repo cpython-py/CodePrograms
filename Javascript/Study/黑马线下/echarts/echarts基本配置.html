@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px"></div>
+<script src="lib/echarts.min.js"></script>
+<script type="text/javascript">
+  const foodArr = [
+    { name: '西兰花', price: 150 },
+    { name: '西瓜', price: 230 },
+    { name: '西葫芦', price: 224 },
+    { name: '西北风', price: 34 },
+    { name: '西红柿', price: 135 },
+    { name: '西芹', price: 147 },
+    { name: '西洋菜', price: 260 },
+  ]
+  // 基于准备好的dom，初始化echarts实例
+  var myChart = echarts.init(document.getElementById('main'));
+
+  // 指定图表的配置项和数据
+  var option = {
+    title: {
+      text: '食物价格',
+      show: true
+    },
+    tooltip: {
+      trigger: 'axis',
+    },
+    grid: {
+      left: '20%'
+    },
+    legend: {
+      data: ['价格'],
+      right: 20,
+      icon: 'circle'
+    },
+    xAxis: {
+      data: foodArr.map(item => item.name)
+    },
+    yAxis: {
+      splitLine: {
+        lineStyle: {
+          type: 'dashed'
+        }
+      }
+    },
+    series: [
+      {
+        name: '价格',
+        type: 'bar',
+        data: foodArr.map(item => item.price)
+      }
+    ],
+    color: ['#86cce9'],
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+</script>
+</body>
+</html>
